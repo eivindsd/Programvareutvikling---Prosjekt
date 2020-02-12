@@ -1,4 +1,4 @@
-"""strikkit URL Configuration
+"""gettingStarted URL Configuration
 
 The `urlpatterns` list routes URLs to views. For more information please see:
     https://docs.djangoproject.com/en/3.0/topics/http/urls/
@@ -14,8 +14,24 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path
+from django.urls import path, include
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path("", include("blog.urls")) #Sender requesten videre til blog.urls sammen med resten av forespørselen
+    #Eks localhost:8000/blog/about/ sender about/ videre til blog.urls og leter etter en lenke der
+    #Når denne står tom blir dette startsiden
 ]
+
+
+
+
+
+
+
+
+
+
+
+
+
