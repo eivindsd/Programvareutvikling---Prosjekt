@@ -34,3 +34,5 @@ class Arrangement(models.Model):
 class deltokArrangement(models.Model):
     arrangementId = models.ForeignKey(Arrangement, on_delete=models.CASCADE)
     brukerId = models.ForeignKey(Bruker, on_delete=models.CASCADE)
+
+
