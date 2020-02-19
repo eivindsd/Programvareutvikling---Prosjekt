@@ -1,17 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="20b0a87a-50f5-4104-a3d7-2619052d5569" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/users/forms.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/users/templates/users/register.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/db.sqlite3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/strikkit/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/strikkit/settings.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/strikkit/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/strikkit/urls.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/website/templates/website/base.html" beforeDir="false" afterPath="$PROJECT_DIR$/website/templates/website/base.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/website/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/website/urls.py" afterDir="false" />
-    </list>
+    <list default="true" id="20b0a87a-50f5-4104-a3d7-2619052d5569" name="Default Changelist" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
