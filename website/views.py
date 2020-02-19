@@ -4,10 +4,10 @@ from django.shortcuts import render
 def home(request):
     return render(request, "website/home.html")
 
-
+"""
 def signUp(request):
     return render(request, "website/signUp.html")
-
+"""
 
 def events(request):
     return render(request, "website/events.html")
