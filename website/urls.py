@@ -8,5 +8,5 @@ urlpatterns = [
     path("CreateEvent/", views.events, name="createEvent"),
     path("profile/", views.events, name="profile"),
     path("signUp/", user_views.register, name="signUp"),
-    path("logIn/", views.events, name="logIn")
+    path("logIn/", user_views.login, name="logIn")
 ]
