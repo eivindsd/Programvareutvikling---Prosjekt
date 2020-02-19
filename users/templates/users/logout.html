@@ -1,0 +1,10 @@
+{% extends "website/base.html" %}
+
+{% block content %}
+        <h2>Du har blitt logget ut</h2>
+        <div class="border-top pt-3">
+            <small class="text-muted">
+                <a href="#{% url 'login' %}">Logg inn på nytt</a>
+            </small>
+        </div>
+{% endblock content %}
