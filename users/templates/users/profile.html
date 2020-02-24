@@ -2,5 +2,14 @@
 {% load crispy_forms_tags %}
 {% block content %}
     <h1>{{ user.username }}</h1>
+    <p> {% if user.is_superuser %}
+            You are an admin
+        {% elif user.is_bedrift %}
+            You are a company
+        {% else %}
+            You are a normal user
+        {% endif %}
+    </p>
+
 {% endblock content %}
 
