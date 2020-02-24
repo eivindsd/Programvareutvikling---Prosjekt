@@ -1,3 +1,4 @@
 from django.contrib import admin
+from website.models import Bruker
 
-# Register your models here.
+admin.site.register(Bruker)
