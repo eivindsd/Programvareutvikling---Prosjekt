@@ -160,6 +160,9 @@ class Arrangement(models.Model):
         utfordringer = Arrangement.objects.filter(title='utfordring', forfatter=bruker)
         return utfordringer
 
+    def get_all(self):
+        return Arrangement.objects.all()
+
 
 class deltokArrangement(models.Model):
     arrangementId = models.ForeignKey(Arrangement, on_delete=models.CASCADE)

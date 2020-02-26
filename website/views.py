@@ -18,8 +18,9 @@ def signUp(request):
 
 
 def events(request):
+    #change this to see all and mine
     contex = {
-        'arrangementer': Arrangement.objects.all()
+        'arrangementer': Arrangement.get_all(Arrangement)
     }
     return render(request, "website/events.html", contex)
 
@@ -28,11 +29,6 @@ def startPage(request):
     if request.user.is_authenticated:
          return redirect('profile')
     return render(request, "website/startPage.html")
-
-
-
-def logIn(request):
-    return render(request, "website/logIn.html")
 
 
 def profile(request):
