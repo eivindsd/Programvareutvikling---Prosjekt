@@ -28,9 +28,9 @@ class UserRegisterForm(UserCreationForm):
         strip=False,
         help_text=_("Gjenta passordet ditt for bekreftelse."),
     )
-    bedrift = forms.BooleanField(widget=forms.CheckboxInput(), label="Bedrift", required=False)
-    vanligBruker = forms.BooleanField(widget=forms.CheckboxInput(), label="Vanlig strikker", required=False)
-    strikkeNivaa = forms.IntegerField(label="Ditt strikkenivå", required=False, help_text=_("Ditt strikke nivå av 100."),)
+    bedrift = forms.BooleanField(widget=forms.CheckboxInput(), label="Jeg er en bedrif", required=False)
+    vanligBruker = forms.BooleanField(widget=forms.CheckboxInput(), label="Jeg er en privatperson", required=False)
+    strikkeNivaa = forms.IntegerField(label="Ditt strikkenivå", required=False, help_text=_("Ditt strikkenivå; 0-100."),)
     bursdag = forms.DateField(required=False, label="Fødselsdato", input_formats=['%d/%m/%Y'],
                               help_text=_("dd/mm/åååå"),)
     fornavn = forms.CharField(label='Fornavn')
