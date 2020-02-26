@@ -1,6 +1,8 @@
 from django.shortcuts import render, redirect
 from website.models import Arrangement
 
+from website.models import Arrangement
+
 
 def home(request):
     if not request.user.is_authenticated:
@@ -23,6 +25,8 @@ def events(request):
 
 
 def startPage(request):
+    if request.user.is_authenticated:
+         return redirect('profile')    
     return render(request, "website/startPage.html")
 
 

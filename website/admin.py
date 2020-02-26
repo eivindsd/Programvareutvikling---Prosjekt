@@ -9,7 +9,7 @@ admin.site.register(models.Bruker, brukerAdmin)
 
 
 class arrangementAdmin(admin.ModelAdmin):
-    list_display = ('title', 'tidspunkt', 'forfatterId')
+    list_display = ('title', 'tidspunkt', 'forfatter')
 
 
 admin.site.register(models.Arrangement, arrangementAdmin)
