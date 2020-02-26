@@ -1,15 +1,31 @@
 {% extends "website/base.html" %}
 {% load crispy_forms_tags %}
 {% block content %}
-    <h1>{{ user.username }}</h1>
+    <h1>{{ user.first_name }}  {{ user.last_name }}</h1>
     <p> {% if user.is_superuser %}
-            You are an admin
+            Du er en admin
         {% elif user.is_bedrift %}
-            You are a company
+            Du er en bedrift
         {% else %}
-            You are a normal user
+            Du er en bruker
         {% endif %}
     </p>
+    <table border="0">
+  <tr>
+    <td><b>Epost:</b> <p>{{ user.email }}</p></td>
+  </tr>
+  <tr>
+    <td><b>Username:</b> <p>{{ user.username }}</p></td>
+  </tr>
+   <tr>
+    <td><b>strikkeNivå:</b> <p>{{ user.strikkeNivaa }}</p></td>
+  </tr>
+   <tr>
+    <td><b>fødselsDato:</b><p>{{ user.bursdag }}</p> </td>
+  </tr>
+</table>
+
+
 
 {% endblock content %}
 
