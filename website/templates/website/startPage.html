@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Strikkit</title>
+
+    <style>
+        body, html {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+            font-family: "Helvetica Neue", sans-serif;
+        }
+        #left-pane {
+            position: absolute;
+            height: 100%;
+            width: 50%;
+            left: 0;
+            background-color: #5f788a;
+        }
+        #right-pane {
+            position: absolute;
+            height: 100%;
+            width: 50%;
+            right: 0;
+
+            background-color: beige;
+        }
+
+        #text-pane {
+            margin: auto;
+            width: 300px;
+            padding-top: 40%;
+        }
+
+        .text {
+            margin-bottom: 40px;
+        }
+
+        .text p {
+            font-size: 20px;
+            display: inline-block;
+            margin: 0;
+
+        }
+
+        #login-items {
+            width: 60%;
+            min-width: 400px;
+            margin: auto;
+            height: calc(100% - 150px);
+            padding-top: 150px;
+        }
+
+        #logo-icon {
+            width: 50px;
+            height: 50px;
+        }
+
+        #text-container {
+            height: 33%;
+        }
+
+        /*   BUTTONS   */
+        button {
+            width: 100%;
+            border-color: #FFA833;
+            border-radius: 30px;
+            padding: 10px 20px;
+            text-align: center;
+            text-decoration: none;
+            display: block;
+            font-size: 15px;
+            margin-bottom: 10px;
+            cursor: pointer;
+        }
+        #login-button { color: #FFA833 }
+        #registrer-button { background-color: #FFA833; color: #FFFFFF; }
+
+        /*   FONTS   */
+        h1 { letter-spacing: 2px; }
+        h4 { letter-spacing: 0.5px; margin-bottom: 15px; }
+
+        .icon {
+            width: 40px;
+            height: 40px;
+            vertical-align: middle;
+
+        }
+
+    </style>
+</head>
+<body>
+    <div>
+        <div id="left-pane">
+            <div id="text-pane">
+                <div class="text">
+                    <img class="icon" src="/website/static/website/images/start_icon1.png">
+                    <p>Utfordre vennene dine.</p>
+                </div>
+                <div class="text">
+                    <img class="icon" src="/website/static/website/images/start_icon2.png">
+                    <p>Oppgdag nye oppskrifter.</p>
+                </div>
+                <div class="text">
+                    <img class="icon" src="/website/static/website/images/start_icon3.png">
+                    <p>Skjerp ferdighetene dine.</p>
+                </div>
+            </div>
+        </div>
+        <div id="right-pane">
+            <div id="login-items">
+                <div id="text-container">
+                    <img src="" alt="logo" id="logo-icon">
+                    <h1>Sjekk ut dine venners siste bragder</h1>
+                </div>
+                <div id="button-container">
+                    <h4>Registrer deg på Strikkit!</h4>
+                    <button id="registrer-button">Registrer deg</button>
+                    <button id="login-button">Logg inn</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
