@@ -21,7 +21,7 @@
     <td><b>Strikkenivå:</b> <p>{{ user.strikkeNivaa }}</p></td>
   </tr>
    <tr>
-    <td><b>Fødselsdato:</b><p>{{ user.bursdag }}</p> </td>
+    <td><b>Fødselsdato:</b><p>{{ user.bursdag | date:"d/m/Y" }}</p> </td>
   </tr>
 </table>
 
