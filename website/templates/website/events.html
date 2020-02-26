@@ -1,4 +1,11 @@
 {% extends "website/base.html" %}
 {% block content %}
-
+    <h1>Arrangementer</h1>
+    <ul>{% for arr in arrangementer  %}
+        <li>
+            <h2> {{ arr.title }} </h2>
+            <p> {{ arr.innhold }}</p>
+        </li>
+        {% endfor %}
+    </ul>
 {% endblock content %}
