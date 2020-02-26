@@ -25,7 +25,7 @@ def events(request):
 
 def startPage(request):
     if request.user.is_authenticated:
-         return redirect('profile')    
+         return redirect('profile')
     return render(request, "website/startPage.html")
 
 
