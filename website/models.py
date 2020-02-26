@@ -47,29 +47,29 @@ class rolleBrukerManager(BaseUserManager):
 
 class ArrangementManager(models.Manager):
     use_in_migrations = True
-    def _create_arrangement(self, title, navn, innhold, forfatter, **extra_fields):
+    def _create_arrangement(self, type, title, innhold, forfatter, tidspunkt, **extra_fields):
         """override"""
         now = timezone.now()
-        if not title:
+        if not type:
             raise ValueError('Er dette arrangemant et kurs eller en strikkekveld')
-        arrangement = Arrangement(title=title, navn=navn, tidspunkt=now, innhold=innhold, forfatter=forfatter)
+        arrangement = Arrangement(type=type, title=title, tidspunkt=tidspunkt, innhold=innhold, forfatter=forfatter)
         arrangement.save()
         return arrangement
 
-    def create_kurs(self, navn, innhold, forfatter, **extra_fields):
+    def create_kurs(self, title, innhold, forfatter, tidspunkt, **extra_fields):
         if forfatter.is_bedrift:
-            return self._create_arrangement(self, 'kurs', navn, innhold, forfatter, **extra_fields)
+            return self._create_arrangement(self, 'kurs', title, innhold, forfatter, tidspunkt, **extra_fields)
         else:
             return 'Du er ikke en bedrift og kan derfor ikke lage kurs!'
 
-    def create_strikkeKveld(self, navn, innhold, forfatter, **extra_fields):
+    def create_strikkeKveld(self, title, innhold, forfatter, tidspunkt, **extra_fields):
         if forfatter.is_bedrift and forfatter.is_superuser:
             return 'Du er ikke en vanlif bruker og kan derfor ikke lage en strikke kveld!'
-        return self._create_arrangement(self, 'strikke kveld', navn, innhold, forfatter, **extra_fields)
+        return self._create_arrangement(self, 'strikke kveld', title, innhold, forfatter, tidspunkt, **extra_fields)
 
-    def create_utfordring(self, navn, innhold, forfatter, **extra_fields):
+    def create_utfordring(self, title, innhold, forfatter, tidspunkt, **extra_fields):
         if forfatter.is_bedrift:
-            return self._create_arrangement(self, 'utfordring', navn, innhold, forfatter, **extra_fields)
+            return self._create_arrangement(self, 'utfordring', title, innhold, forfatter, tidspunkt, **extra_fields)
         else:
             return 'Du er ikke en bedrift og kan derfor ikke lage kurs!'
 
@@ -120,8 +120,8 @@ class Bruker(AbstractUser):
         verbose_name_plural = ('users')
 
 class Arrangement(models.Model):
+    type = models.CharField(max_length=50)
     title = models.CharField(max_length=50)
-    navn = models.CharField(max_length=50)
     tidspunkt = models.DateTimeField(default=timezone.now)
     innhold = models.TextField()
     forfatter = models.ForeignKey(Bruker, on_delete=models.CASCADE)
