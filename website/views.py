@@ -12,7 +12,10 @@ def signUp(request):
 """
 
 def events(request):
-    return render(request, "website/events.html")
+    contex = {
+        'arrangementer': Arrangement.objects.all()
+    }
+    return render(request, "website/events.html", contex)
 
 
 def logIn(request):
