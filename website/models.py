@@ -45,6 +45,36 @@ class rolleBrukerManager(BaseUserManager):
         return self._create_user(username, email, password, False, False, False, 2, **extra_fields)
 
 
+class ArrangementManager(models.Manager):
+    use_in_migrations = True
+    def _create_arrangement(self, title, navn, innhold, forfatter, **extra_fields):
+        """override"""
+        now = timezone.now()
+        if not title:
+            raise ValueError('Er dette arrangemant et kurs eller en strikkekveld')
+        arrangement = Arrangement(title=title, navn=navn, tidspunkt=now, innhold=innhold, forfatter=forfatter)
+        arrangement.save()
+        return arrangement
+
+    def create_kurs(self, navn, innhold, forfatter, **extra_fields):
+        if forfatter.is_bedrift:
+            return self._create_arrangement(self, 'kurs', navn, innhold, forfatter, **extra_fields)
+        else:
+            return 'Du er ikke en bedrift og kan derfor ikke lage kurs!'
+
+    def create_strikkeKveld(self, navn, innhold, forfatter, **extra_fields):
+        if forfatter.is_bedrift and forfatter.is_superuser:
+            return 'Du er ikke en vanlif bruker og kan derfor ikke lage en strikke kveld!'
+        return self._create_arrangement(self, 'strikke kveld', navn, innhold, forfatter, **extra_fields)
+
+    def create_utfordring(self, navn, innhold, forfatter, **extra_fields):
+        if forfatter.is_bedrift:
+            return self._create_arrangement(self, 'utfordring', navn, innhold, forfatter, **extra_fields)
+        else:
+            return 'Du er ikke en bedrift og kan derfor ikke lage kurs!'
+
+
+
 class Rolle(models.Model):
     rolleNavn = models.CharField(max_length=40)
 
@@ -94,15 +124,41 @@ class Arrangement(models.Model):
     navn = models.CharField(max_length=50)
     tidspunkt = models.DateTimeField(default=timezone.now)
     innhold = models.TextField()
-    forfatterId = models.ForeignKey(Bruker, on_delete=models.CASCADE)
+    forfatter = models.ForeignKey(Bruker, on_delete=models.CASCADE)
+
+    objects = ArrangementManager()
 
     def __str__(self):
-        return self.title
+        return self.title + ' : ' + self.navn
+
+    class Meta:
+        verbose_name = ('arrangement')
+        verbose_name_plural = ('arrangementer')
 
     #add rolleId
-    def get_all(self):
-        liste = Arrangement.objects.all()
-        return liste
+    def get_strikeKvelder(self):
+        strikeKvelder = Arrangement.objects.filter(title='strikke kveld')
+        return strikeKvelder
+
+    def get_kurs(self):
+        kurs = Arrangement.objects.filter(title='kurs')
+        return kurs
+
+    def get_utfordringer(self):
+        utfordringer = Arrangement.objects.filter(title='utfordring')
+        return utfordringer
+
+    def get_mineStrikeKvelder(self, bruker):
+        strikeKvelder = Arrangement.objects.filter(title='strikke kveld', forfatter=bruker)
+        return strikeKvelder
+
+    def get_mineKurs(self, bruker):
+        kurs = Arrangement.objects.filter(title='kurs', forfatter=bruker)
+        return kurs
+
+    def get_mineUtfordringer(self, bruker):
+        utfordringer = Arrangement.objects.filter(title='utfordring', forfatter=bruker)
+        return utfordringer
 
 
 class deltokArrangement(models.Model):
