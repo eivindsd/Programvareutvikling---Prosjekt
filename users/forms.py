@@ -6,12 +6,13 @@ from django.utils.translation import gettext, gettext_lazy as _
 from website.models import Rolle, Bruker
 from django.contrib.auth.forms import UserCreationForm
 
+
 class UserRegisterForm(UserCreationForm):
     #email = forms.EmailInput() #Leaving this blanck will set this as a required field
     error_messages = {
         'password_mismatch': _('De to passordfeltene stemte ikke.'),
     }
-    email = forms.EmailField(label=_("Epost"), required=True)
+    email = forms.EmailField(label=_("E-post"), required=True)
     password1 = forms.CharField(
         label=_("Passord"),
         strip=False,
@@ -22,14 +23,14 @@ class UserRegisterForm(UserCreationForm):
                    "Passordet ditt kan ikke være helt numerisk."),
     )
     password2 = forms.CharField(
-        label=_("Passord bekreftelse"),
+        label=_("Bekreft ditt passord"),
         widget=forms.PasswordInput(attrs={'autocomplete': 'new-password'}),
         strip=False,
-        help_text=_("Skriv inn det samme passordet som før, for bekreftelse."),
+        help_text=_("Gjenta passordet ditt for bekreftelse."),
     )
-    bedrift = forms.BooleanField(widget=forms.CheckboxInput(), label="Er du en Bedrift", required=False)
-    vanligBruker = forms.BooleanField(widget=forms.CheckboxInput(), label="Er du en vanlig Bruker", required=False)
-    strikkeNivaa = forms.IntegerField(label="strikkeNivå", required=False, help_text=_("Ditt strikke nivå av 100."),)
+    bedrift = forms.BooleanField(widget=forms.CheckboxInput(), label="Bedrift", required=False)
+    vanligBruker = forms.BooleanField(widget=forms.CheckboxInput(), label="Vanlig strikker", required=False)
+    strikkeNivaa = forms.IntegerField(label="Ditt strikkenivå", required=False, help_text=_("Ditt strikke nivå av 100."),)
     bursdag = forms.DateField(required=False, label="Fødselsdato", input_formats=['%d/%m/%Y'],
                               help_text=_("dd/mm/åååå"),)
     fornavn = forms.CharField(label='Fornavn')

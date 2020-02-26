@@ -3,25 +3,25 @@
 {% block content %}
     <h1>{{ user.first_name }}  {{ user.last_name }}</h1>
     <p> {% if user.is_superuser %}
-            Du er en admin
+            Du er en adminbruker
         {% elif user.is_bedrift %}
-            Du er en bedrift
+            Du er en bedriftsbruker
         {% else %}
-            Du er en bruker
+            Du er en vanlig strikkebruker
         {% endif %}
     </p>
     <table border="0">
   <tr>
-    <td><b>Epost:</b> <p>{{ user.email }}</p></td>
+    <td><b>E-post:</b> <p>{{ user.email }}</p></td>
   </tr>
   <tr>
-    <td><b>Username:</b> <p>{{ user.username }}</p></td>
+    <td><b>Brukernavn:</b> <p>{{ user.username }}</p></td>
   </tr>
    <tr>
-    <td><b>strikkeNivå:</b> <p>{{ user.strikkeNivaa }}</p></td>
+    <td><b>Strikkenivå:</b> <p>{{ user.strikkeNivaa }}</p></td>
   </tr>
    <tr>
-    <td><b>fødselsDato:</b><p>{{ user.bursdag }}</p> </td>
+    <td><b>Fødselsdato:</b><p>{{ user.bursdag }}</p> </td>
   </tr>
 </table>
 
