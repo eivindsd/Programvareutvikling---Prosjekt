@@ -83,7 +83,7 @@ class Bruker(AbstractUser):
 
 
     def __str__(self):
-        return self.navn
+        return self.first_name + ' ' + self.last_name
 
     class Meta:
         verbose_name = ('user')
