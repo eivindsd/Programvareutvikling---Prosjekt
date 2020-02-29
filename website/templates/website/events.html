@@ -1,13 +1,21 @@
 {% extends "website/base.html" %}
 {% block content %}
-    <h1 style="margin-bottom: 1.5rem">Arrangementer</h1>
-    {% for arr in arrangementer  %}
+    <div style="display: table">
+        <h1 style="margin-bottom: 2rem; display: inline">Arrangementer</h1>
+        <form action="/createEvent/">
+            {% csrf_token %}
+            <input type="submit" value="Opprett" class="btn btn-primary" style="display: table-cell; position: absolute; right: 0; vertical-align: middle"/>
+        </form>
+
+    </div>
+    <br><br><br>
+   {% for arr in arrangementer  %}
         <div class="card" id="event-card" style="margin-bottom: 2rem;">
             <div class="card-header">
-                {{ arr.title }}
+                {{ arr.type }}
             </div>
           <div class="card-body">
-            <h5 class="card-title">{{ arr.navn }}</h5>
+            <h5 class="card-title">{{ arr.title }}</h5>
             <p class="card-text">{{arr.innhold}} </p>
             <a href="#" class="btn btn-primary">Meld deg på</a>
           </div>

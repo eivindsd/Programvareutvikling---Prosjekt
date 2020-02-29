@@ -74,47 +74,40 @@ class UserRegisterForm(UserCreationForm):
         return bruker
 
 
-class eventForm():
-
-    title = forms.CharField(label="'Tittel"'', strip=False)
-    time = forms.DateTimeField(label='Tidspunkt', input_formats=['%d/%m/%y %H:%M'], help_text='dd/mm/åååå tt:mm')
+class eventForm(forms.ModelForm):
+    title = forms.CharField(label="Tittel", strip=False)
+    time = forms.DateTimeField(label='Tidspunkt', input_formats=['%d/%m/%Y %H:%M'], help_text='dd/mm/åååå tt:mm')
     location = forms.CharField(label='Sted')
     text = forms.CharField(widget=forms.Textarea, label='Beskrivelse')
 
-    CHOICES = [('strikkekveld', 'strikkekveld'),
-               ('kurs', 'surs'),
-               ('utfordring', 'stfordring')]
-
-    type_select = forms.ChoiceField(choices=CHOICES, widget=forms.RadioSelect)
-
-
-    def getUser(self, request):
-        current_user = request.user #Should return the user currently logged in
-        return current_user
-
-
-
-
     class Meta():
         model = Arrangement
-        fields = ('title', 'time', 'type_select', 'location', 'text')
+        fields = ('title', 'time', 'location', 'text')
+
+    def __init__(self, *args, **kwargs):
+        self.user = kwargs.pop('user', None)
+        super().__init__(*args, **kwargs)
+
+    def getUser(self):
+        current_user = self.user #Should return the user currently logged in
+        return current_user
 
     def save(self, *args, **kwargs):
         data = self.cleaned_data
-        if data['strikkekveld']:
-            arrangement = ArrangementManager.create_strikkeKveld(
+        if data['type_select'] == 'strikkekveld':
+            arrangement = Arrangement.objects.create_strikkeKveld(
                 title=data['title'],
                 innhold=data['text'],
                 forfatter=self.getUser(),
                 tidspunkt=data['time'])
-        elif data['kurs']:
-            arrangement = ArrangementManager.create_Kurs(
+        elif data['type_select'] == 'kurs':
+            arrangement = Arrangement.objects.create_Kurs(
                 title=data['title'],
                 innhold=data['text'],
                 forfatter=self.getUser(),
                 tidspunkt=data['time'])
-        elif data['utfordring']:
-            arrangement = ArrangementManager.create_utfordring(
+        else:
+            arrangement = Arrangement.objects.create_utfordring(
                 title=data['title'],
                 innhold=data['text'],
                 forfatter=self.getUser(),
@@ -122,4 +115,37 @@ class eventForm():
             )
         return arrangement
 
+class eventFormAdmin(eventForm):
+    CHOICES = [('strikkekveld', 'strikkekveld'),
+               ('kurs', 'kurs'),
+               ('utfordring', 'utfordring')]
+    type_select = forms.ChoiceField(choices=CHOICES, widget=forms.RadioSelect)
 
+    class Meta():
+        model = Arrangement
+        fields = ('title', 'time', 'type_select', 'location', 'text')
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+
+class eventFormBedrift(eventForm):
+    CHOICES = [('kurs', 'kurs'), ('utfordring', 'utfordring')]
+    type_select = forms.ChoiceField(choices=CHOICES, widget=forms.RadioSelect)
+
+    class Meta():
+        model = Arrangement
+        fields = ('title', 'time', 'type_select', 'location', 'text')
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+
+class eventFormBruker(eventForm):
+    CHOICES = [('strikkekveld', 'strikkekveld')]
+    type_select = forms.ChoiceField(choices=CHOICES, widget=forms.RadioSelect)
+
+    class Meta():
+        model = Arrangement
+        fields = ('title', 'time', 'type_select', 'location', 'text')
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)

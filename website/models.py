@@ -46,10 +46,11 @@ class rolleBrukerManager(BaseUserManager):
 
 
 class ArrangementManager(models.Manager):
+    def __init__(self):
+        super().__init__()
     use_in_migrations = True
     def _create_arrangement(self, type, title, innhold, forfatter, tidspunkt, **extra_fields):
         """override"""
-        now = timezone.now()
         if not type:
             raise ValueError('Er dette arrangemant et kurs eller en strikkekveld')
         arrangement = Arrangement(type=type, title=title, tidspunkt=tidspunkt, innhold=innhold, forfatter=forfatter)
@@ -58,20 +59,20 @@ class ArrangementManager(models.Manager):
 
     def create_kurs(self, title, innhold, forfatter, tidspunkt, **extra_fields):
         if forfatter.is_bedrift:
-            return self._create_arrangement(self, 'kurs', title, innhold, forfatter, tidspunkt, **extra_fields)
+            return self._create_arrangement('kurs', title, innhold, forfatter, tidspunkt, **extra_fields)
         else:
             return 'Du er ikke en bedrift og kan derfor ikke lage kurs!'
 
     def create_strikkeKveld(self, title, innhold, forfatter, tidspunkt, **extra_fields):
         if forfatter.is_bedrift and forfatter.is_superuser:
             return 'Du er ikke en vanlif bruker og kan derfor ikke lage en strikke kveld!'
-        return self._create_arrangement(self, 'strikke kveld', title, innhold, forfatter, tidspunkt, **extra_fields)
+        return self._create_arrangement('strikke kveld', title, innhold, forfatter, tidspunkt, **extra_fields)
 
     def create_utfordring(self, title, innhold, forfatter, tidspunkt, **extra_fields):
         if forfatter.is_bedrift:
-            return self._create_arrangement(self, 'utfordring', title, innhold, forfatter, tidspunkt, **extra_fields)
+            return self._create_arrangement('utfordring', title, innhold, forfatter, tidspunkt, **extra_fields)
         else:
-            return 'Du er ikke en bedrift og kan derfor ikke lage kurs!'
+            raise ValueError('Du er ikke en bedrift og kan derfor ikke lage kurs!')
 
 
 
@@ -111,13 +112,20 @@ class Bruker(AbstractUser):
     is_bedrift = models.BooleanField(_('bedrift status'), default=False)
     is_superuser = models.BooleanField(_('superuser status'), default=False)
 
-
     def __str__(self):
         return self.first_name + ' ' + self.last_name
 
     class Meta:
         verbose_name = ('user')
         verbose_name_plural = ('users')
+
+    def get_bruker_type(self):
+        if self.is_superuser:
+            return 'admin'
+        elif self.is_bedrift:
+            return 'bedrift'
+        else:
+            return 'vanlig_bruker'
 
 class Arrangement(models.Model):
     type = models.CharField(max_length=50)
