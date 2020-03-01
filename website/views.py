@@ -1,20 +1,38 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
+from users.forms import eventForm, eventFormAdmin, eventFormBedrift, eventFormBruker
+from website.models import Arrangement
+from django.contrib import messages
+from website.models import Arrangement
 
 
 def home(request):
+    if not request.user.is_authenticated:
+        return redirect('startPage')
     return render(request, "website/home.html")
+
+
 
 """
 def signUp(request):
     return render(request, "website/signUp.html")
 """
 
+
 def events(request):
-    return render(request, "website/events.html")
+    #change this to see all and mine
+    if request.method == 'POST':
+        print("Meld deg på! Request: {} ".format(request.POST.get('arr')))
+    contex = {
+        'arrangementer': Arrangement.get_all(Arrangement),
+        'user' : request.user
+    }
+    return render(request, "website/events.html", contex)
 
 
-def logIn(request):
-    return render(request, "website/logIn.html")
+def startPage(request):
+    if request.user.is_authenticated:
+         return redirect('profile')
+    return render(request, "website/startPage.html")
 
 
 def profile(request):
@@ -22,4 +40,30 @@ def profile(request):
 
 
 def createEvent(request):
-    return render(request, "website/createEvent.html")
+    if request.method == 'POST':
+        if request.user:
+            if request.user.get_bruker_type() == 'admin':
+                form = eventFormAdmin(request.POST, user=request.user)
+            elif request.user.get_bruker_type() == 'bedrift':
+                form = eventFormBedrift(request.POST, user=request.user)
+            else:
+                form = eventFormBruker(request.POST, user=request.user)
+        else:
+            print("Error user!")
+            return False
+        if form.is_valid():
+            form.save()
+            title = form.cleaned_data.get('title')
+            type_select = form.cleaned_data.get('type_select')
+            messages.success(request, f'{type_select} opprettet for {title}')
+            return redirect('events')
+    else:
+        if request.user:
+            if request.user.get_bruker_type() == 'admin':
+                form = eventFormAdmin(user=request.user)
+            elif request.user.get_bruker_type() == 'bedrift':
+                form = eventFormBedrift(user=request.user)
+            else:
+                form = eventFormBruker(user=request.user)
+    return render(request, "website/createEvent.html", {'form': form})
+

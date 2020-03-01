@@ -1,6 +1,31 @@
 {% extends "website/base.html" %}
 {% load crispy_forms_tags %}
 {% block content %}
-    <h1>{{ user.username }}</h1>
+    <h1>{{ user.first_name }}  {{ user.last_name }}</h1>
+    <p> {% if user.is_superuser %}
+            Du er en adminbruker
+        {% elif user.is_bedrift %}
+            Du er en bedriftsbruker
+        {% else %}
+            Du er en vanlig strikkebruker
+        {% endif %}
+    </p>
+    <table border="0">
+  <tr>
+    <td><b>E-post:</b> <p>{{ user.email }}</p></td>
+  </tr>
+  <tr>
+    <td><b>Brukernavn:</b> <p>{{ user.username }}</p></td>
+  </tr>
+   <tr>
+    <td><b>Strikkenivå:</b> <p>{{ user.strikkeNivaa }}</p></td>
+  </tr>
+   <tr>
+    <td><b>Fødselsdato:</b><p>{{ user.bursdag | date:"d/m/Y" }}</p> </td>
+  </tr>
+</table>
+
+
+
 {% endblock content %}
 
