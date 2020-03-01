@@ -20,6 +20,8 @@ def signUp(request):
 
 def events(request):
     #change this to see all and mine
+    if request.method == 'POST':
+        print("Meld deg på! Request: {} ".format(request.POST.get('arr')))
     contex = {
         'arrangementer': Arrangement.get_all(Arrangement),
         'user' : request.user

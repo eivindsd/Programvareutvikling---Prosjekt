@@ -149,3 +149,20 @@ class eventFormBruker(eventForm):
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
+
+
+
+class showArrangementerForm(forms.ModelForm):
+    """This form has to be fixed"""
+    title = forms.CharField(label="Tittel", strip=False)
+    time = forms.DateTimeField(label='Tidspunkt', input_formats=['%d/%m/%Y %H:%M'], help_text='dd/mm/åååå tt:mm')
+    location = forms.CharField(label='Sted')
+    text = forms.CharField(widget=forms.Textarea, label='Beskrivelse')
+
+    class Meta():
+        model = Arrangement
+        fields = ('title', 'time', 'location', 'text')
+        readonly = ('title', 'time', 'location', 'text')
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)

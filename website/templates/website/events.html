@@ -9,16 +9,19 @@
 
     </div>
     <br><br><br>
-   {% for arr in arrangementer  %}
-        <div class="card" id="event-card" style="margin-bottom: 2rem;">
-            <div class="card-header">
-                {{ arr.type }}
+    <form method="POST">
+        {% csrf_token %}
+        {% for arr in arrangementer  %}
+            <div class="card" id="event-card" style="margin-bottom: 2rem;">
+                <div class="card-header">
+                    {{ arr.type }}
+                </div>
+                <div class="card-body">
+                    <h5 class="card-title">{{ arr.title }}</h5>
+                    <p class="card-text">{{arr.innhold}} </p>
+                    <input type="submit" value="Meld deg på" class="btn btn-primary"/>
+                </div>
             </div>
-          <div class="card-body">
-            <h5 class="card-title">{{ arr.title }}</h5>
-            <p class="card-text">{{arr.innhold}} </p>
-            <a href="#" class="btn btn-primary">Meld deg på</a>
-          </div>
-        </div>
+    </form>
     {% endfor %}
 {% endblock content %}
