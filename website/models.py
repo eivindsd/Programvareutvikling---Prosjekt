@@ -49,28 +49,28 @@ class ArrangementManager(models.Manager):
     def __init__(self):
         super().__init__()
     use_in_migrations = True
-    def _create_arrangement(self, type, title, innhold, forfatter, tidspunkt, **extra_fields):
+    def _create_arrangement(self, type, title, innhold, forfatter, tidspunkt,location, **extra_fields):
         """override"""
         if not type:
             raise ValueError('Er dette arrangemant et kurs eller en strikkekveld')
-        arrangement = Arrangement(type=type, title=title, tidspunkt=tidspunkt, innhold=innhold, forfatter=forfatter)
+        arrangement = Arrangement(type=type, title=title, tidspunkt=tidspunkt, innhold=innhold, location=location, forfatter=forfatter)
         arrangement.save()
         return arrangement
 
-    def create_kurs(self, title, innhold, forfatter, tidspunkt, **extra_fields):
-        if forfatter.is_bedrift:
-            return self._create_arrangement('kurs', title, innhold, forfatter, tidspunkt, **extra_fields)
+    def create_kurs(self, title, innhold, forfatter, tidspunkt,location, **extra_fields):
+        if forfatter.is_bedrift or forfatter.is_superuser:
+            return self._create_arrangement('kurs', title, innhold, forfatter, tidspunkt,location, **extra_fields)
         else:
             return 'Du er ikke en bedrift og kan derfor ikke lage kurs!'
 
-    def create_strikkeKveld(self, title, innhold, forfatter, tidspunkt, **extra_fields):
-        if forfatter.is_bedrift and forfatter.is_superuser:
+    def create_strikkeKveld(self, title, innhold, forfatter, tidspunkt,location, **extra_fields):
+        if forfatter.is_bedrift or forfatter.is_superuser:
             return 'Du er ikke en vanlif bruker og kan derfor ikke lage en strikke kveld!'
-        return self._create_arrangement('strikke kveld', title, innhold, forfatter, tidspunkt, **extra_fields)
+        return self._create_arrangement('strikke kveld', title, innhold, forfatter, tidspunkt,location, **extra_fields)
 
-    def create_utfordring(self, title, innhold, forfatter, tidspunkt, **extra_fields):
+    def create_utfordring(self, title, innhold, forfatter, tidspunkt,location, **extra_fields):
         if forfatter.is_bedrift:
-            return self._create_arrangement('utfordring', title, innhold, forfatter, tidspunkt, **extra_fields)
+            return self._create_arrangement('utfordring', title, innhold, forfatter, tidspunkt,location, **extra_fields)
         else:
             raise ValueError('Du er ikke en bedrift og kan derfor ikke lage kurs!')
 
@@ -132,12 +132,13 @@ class Arrangement(models.Model):
     title = models.CharField(max_length=50)
     tidspunkt = models.DateTimeField(default=timezone.now)
     innhold = models.TextField()
-    forfatter = models.ForeignKey(Bruker, on_delete=models.CASCADE)
+    location = models.CharField(max_length=50, null=True)
+    forfatter = models.ForeignKey('Bruker', on_delete=models.CASCADE)
 
     objects = ArrangementManager()
 
     def __str__(self):
-        return self.title + ' : ' + self.navn
+        return self.title + ' : ' + self.type
 
     class Meta:
         verbose_name = ('arrangement')
