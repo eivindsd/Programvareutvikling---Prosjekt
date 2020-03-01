@@ -29,7 +29,9 @@
       <div class="collapse navbar-collapse" id="navbarToggle">
         <div class="navbar-nav mr-auto">
           <a class="nav-item nav-link" href="{% url 'home' %}">Hjem</a>
+          {% if user.is_authenticated %}
           <a class="nav-item nav-link" href="{% url 'events' %}">Arrangementer</a>
+          {% endif %}
         </div>
         <!-- Navbar Right Side -->
          <div class="navbar-nav">
@@ -65,8 +67,8 @@
               <ul class="list-group">
                 <li class="list-group-item list-group-item-light">Nylige innlegg</li>
                 <li class="list-group-item list-group-item-light">Kunngjøringer</li>
-                <li class="list-group-item list-group-item-light">Kalendere</li>
-                <li class="list-group-item list-group-item-light">etc</li>
+                <li class="list-group-item list-group-item-light">Arrangementer</li>
+                <li class="list-group-item list-group-item-light">Strikkekvelder</li>
               </ul>
             </p>
           </div>
