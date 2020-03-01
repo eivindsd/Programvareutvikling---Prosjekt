@@ -18,8 +18,9 @@
                 </div>
                 <div class="card-body">
                     <h5 class="card-title">{{ arr.title }}</h5>
-                    <h6 class="card-title">{{ arr.tidspunkt }}</h6>
-                    <p class="card-text">{{arr.innhold}} </p>
+                    <h6 class="card-title">Dato: {{ arr.tidspunkt }}</h6>
+                    <h6 class="card-title">Sted: {{ arr.location }}</h6>
+                    <p class="card-text">Mer informasjon: {{arr.innhold}} </p>
                     <input type="submit" value="Meld deg på" class="btn btn-primary"/>
                 </div>
             </div>

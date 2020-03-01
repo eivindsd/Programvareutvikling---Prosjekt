@@ -99,19 +99,22 @@ class eventForm(forms.ModelForm):
                 title=data['title'],
                 innhold=data['text'],
                 forfatter=self.getUser(),
-                tidspunkt=data['time'])
+                tidspunkt=data['time'],
+                location=data['location'])
         elif data['type_select'] == 'kurs':
             arrangement = Arrangement.objects.create_kurs(
                 title=data['title'],
                 innhold=data['text'],
                 forfatter=self.getUser(),
-                tidspunkt=data['time'])
+                tidspunkt=data['time'],
+                location=data['location'])
         else:
             arrangement = Arrangement.objects.create_utfordring(
                 title=data['title'],
                 innhold=data['text'],
                 forfatter=self.getUser(),
-                tidspunkt=data['time']
+                tidspunkt=data['time'],
+                location=data['location']
             )
         return arrangement
 
