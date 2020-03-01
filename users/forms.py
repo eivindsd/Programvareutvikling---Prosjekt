@@ -101,7 +101,7 @@ class eventForm(forms.ModelForm):
                 forfatter=self.getUser(),
                 tidspunkt=data['time'])
         elif data['type_select'] == 'kurs':
-            arrangement = Arrangement.objects.create_Kurs(
+            arrangement = Arrangement.objects.create_kurs(
                 title=data['title'],
                 innhold=data['text'],
                 forfatter=self.getUser(),
