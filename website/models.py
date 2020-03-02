@@ -69,7 +69,7 @@ class ArrangementManager(models.Manager):
         return self._create_arrangement('strikke kveld', title, innhold, forfatter, tidspunkt,location, **extra_fields)
 
     def create_utfordring(self, title, innhold, forfatter, tidspunkt,location, **extra_fields):
-        if forfatter.is_bedrift:
+        if forfatter.is_bedrift or forfatter.is_superuser:
             return self._create_arrangement('utfordring', title, innhold, forfatter, tidspunkt,location, **extra_fields)
         else:
             raise ValueError('Du er ikke en bedrift og kan derfor ikke lage kurs!')
