@@ -64,7 +64,7 @@ class ArrangementManager(models.Manager):
             return 'Du er ikke en bedrift og kan derfor ikke lage kurs!'
 
     def create_strikkeKveld(self, title, innhold, forfatter, tidspunkt,location, **extra_fields):
-        if forfatter.is_bedrift or forfatter.is_superuser:
+        if forfatter.is_bedrift:
             return 'Du er ikke en vanlif bruker og kan derfor ikke lage en strikke kveld!'
         return self._create_arrangement('strikke kveld', title, innhold, forfatter, tidspunkt,location, **extra_fields)
 
