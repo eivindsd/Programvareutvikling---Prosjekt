@@ -30,8 +30,6 @@ class UserRegisterForm(UserCreationForm):
     CHOICES = [('bedrift', 'Jeg er en bedrift'),
                ('vanligBruker', 'Jeg er en privatperson'),]
     type_select = forms.ChoiceField(choices=CHOICES, widget=forms.RadioSelect)
-    #bedrift = forms.BooleanField(widget=forms.CheckboxInput(), label="Jeg er en bedrift", required=False)
-    #vanligBruker = forms.BooleanField(widget=forms.CheckboxInput(), label="Jeg er en privatperson", required=False)
     strikkeNivaa = forms.IntegerField(label="Ditt strikkenivå", required=False, help_text=_("Ditt strikkenivå; 0-100."),)
     bursdag = forms.DateField(required=False, label="Fødselsdato", input_formats=['%d/%m/%Y'],
                               help_text=_("dd/mm/åååå"),)
