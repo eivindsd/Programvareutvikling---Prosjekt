@@ -133,7 +133,7 @@ class Arrangement(models.Model):
     tidspunkt = models.DateTimeField(default=timezone.now)
     innhold = models.TextField()
     location = models.CharField(max_length=50, null=True)
-    forfatter = models.ForeignKey('Bruker', on_delete=models.CASCADE)
+    forfatter = models.ForeignKey('Bruker', on_delete=models.CASCADE, null=True, default=None)
 
     objects = ArrangementManager()
 
@@ -174,6 +174,6 @@ class Arrangement(models.Model):
 
 
 class deltokArrangement(models.Model):
-    arrangement = models.ForeignKey(Arrangement, on_delete=models.CASCADE)
-    bruker = models.ForeignKey(Bruker, on_delete=models.CASCADE)
+    arrangement = models.ForeignKey(Arrangement, on_delete=models.CASCADE, blank=True, null=True, default=None)
+    bruker = models.ForeignKey(Bruker, on_delete=models.CASCADE, blank=True, null=True, default=None)
 
