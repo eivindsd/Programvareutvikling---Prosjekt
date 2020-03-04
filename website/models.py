@@ -1,16 +1,16 @@
 from django.contrib.auth.validators import UnicodeUsernameValidator
 from django.db import models
 from django.utils import timezone
-from django.contrib.auth.models import User
-#from django.contrib.auth.hashers import PBKDF2PasswordHasher
-from django.contrib.auth.models import AbstractBaseUser, UserManager
 from django.contrib.auth.base_user import BaseUserManager
 from django.utils.translation import gettext_lazy as _
-from django.contrib.auth.models import PermissionsMixin, AbstractUser
+from django.contrib.auth.models import AbstractUser
 
+"""Different models for the database, as well as methods to register entities"""
 
 class rolleBrukerManager(BaseUserManager):
+    """Adds a user to the database"""
     use_in_migrations = True
+
     def _create_user(self, username, email, password, is_superuser, is_bedrift, is_staff, rolleId, **extra_fields):
         """override"""
         now = timezone.now()
@@ -46,9 +46,13 @@ class rolleBrukerManager(BaseUserManager):
 
 
 class ArrangementManager(models.Manager):
+    """Adds events to the database"""
+
     def __init__(self):
         super().__init__()
+
     use_in_migrations = True
+
     def _create_arrangement(self, type, title, innhold, forfatter, tidspunkt,location, **extra_fields):
         """override"""
         if not type:
@@ -77,6 +81,7 @@ class ArrangementManager(models.Manager):
 
 
 class Rolle(models.Model):
+
     rolleNavn = models.CharField(max_length=40)
 
     def __str__(self):
@@ -84,6 +89,8 @@ class Rolle(models.Model):
 
 
 class Bruker(AbstractUser):
+    """Database table for User"""
+
     username_validator = UnicodeUsernameValidator()
 
     username = models.CharField(
@@ -116,6 +123,7 @@ class Bruker(AbstractUser):
         return self.first_name + ' ' + self.last_name
 
     class Meta:
+        """Name used in the framework, for easier debugging"""
         verbose_name = ('user')
         verbose_name_plural = ('users')
 
@@ -128,6 +136,8 @@ class Bruker(AbstractUser):
             return 'vanlig_bruker'
 
 class Arrangement(models.Model):
+    """DB model for events"""
+
     type = models.CharField(max_length=50)
     title = models.CharField(max_length=50)
     tidspunkt = models.DateTimeField(default=timezone.now)
