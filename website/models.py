@@ -113,7 +113,6 @@ class Bruker(AbstractUser):
     alder = models.IntegerField(null=True)
     rolleId = models.IntegerField()
     strikkeNivaa = models.IntegerField(validators=[MaxValueValidator(100), MinValueValidator(0)], null=True)
-    #is_staff = models.BooleanField(_('staff status'), default=True)
     objects = rolleBrukerManager()
     is_bedrift = models.BooleanField(_('bedrift status'), default=False)
     is_superuser = models.BooleanField(_('superuser status'), default=False)
