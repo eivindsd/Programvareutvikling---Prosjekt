@@ -1,21 +1,14 @@
 from django.shortcuts import render, redirect
-from users.forms import eventForm, eventFormAdmin, eventFormBedrift, eventFormBruker
-from website.models import Arrangement
+from users.forms import eventFormAdmin, eventFormBedrift, eventFormBruker
 from django.contrib import messages
 from website.models import Arrangement
 
+"""Loads the correct template and form (when needed)"""
 
 def home(request):
     if not request.user.is_authenticated:
         return redirect('startPage')
     return render(request, "website/home.html")
-
-
-
-"""
-def signUp(request):
-    return render(request, "website/signUp.html")
-"""
 
 
 def events(request):
