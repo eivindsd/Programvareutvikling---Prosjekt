@@ -1,14 +1,13 @@
 from django import forms
-#from django.contrib.auth.models import User
-from django.contrib.auth import password_validation
-from django.forms import DateInput
 from django.utils.translation import gettext, gettext_lazy as _
-from website.models import Rolle, Bruker, Arrangement, ArrangementManager
+from website.models import Bruker, Arrangement
 from django.contrib.auth.forms import UserCreationForm
 
+"""Class for the different forms used on the site"""
 
 class UserRegisterForm(UserCreationForm):
-    #email = forms.EmailInput() #Leaving this blanck will set this as a required field
+    """Form to register the user"""
+
     error_messages = {
         'password_mismatch': _('De to passordfeltene stemte ikke.'),
     }
@@ -41,6 +40,7 @@ class UserRegisterForm(UserCreationForm):
         fields = ['fornavn', 'etternavn', 'username', 'email', 'password1', 'password2', 'bedrift', 'vanligBruker', 'strikkeNivaa', 'bursdag']
 
     def clean(self):
+        """Validates the data input from the form"""
         print(self.data)
         print(self.errors)
         cleaned_data = self.cleaned_data
@@ -48,6 +48,7 @@ class UserRegisterForm(UserCreationForm):
         return cleaned_data
 
     def save(self, *args, **kwargs):
+        """Creates the correct user type and stores it in the database"""
         data = self.cleaned_data
         bruker = None
         if data['bedrift']:
@@ -69,12 +70,13 @@ class UserRegisterForm(UserCreationForm):
                 bursdag=data['bursdag'],
                 strikkeNivaa=data['strikkeNivaa'],)
 
-
         # User is already saved after calling BaseUserManager function.
         return bruker
 
 
 class eventForm(forms.ModelForm):
+    """Form to create an event"""
+
     title = forms.CharField(label="Tittel", strip=False)
     time = forms.DateTimeField(label='Tidspunkt', input_formats=['%d/%m/%Y %H:%M'], help_text='dd/mm/åååå tt:mm')
     location = forms.CharField(label='Sted')
@@ -89,11 +91,13 @@ class eventForm(forms.ModelForm):
         super().__init__(*args, **kwargs)
 
     def getUser(self):
-        current_user = self.user #Should return the user currently logged in
+        """Returns the user who is currently logged in"""
+        current_user = self.user
         return current_user
 
     def save(self, *args, **kwargs):
-        data = self.cleaned_data
+        """Creates the correct event-type and stores it in the database"""
+        data = self.cleaned_data  #Gets the data from the form, stores it as a dict
         if data['type_select'] == 'strikkekveld':
             arrangement = Arrangement.objects.create_strikkeKveld(
                 title=data['title'],
@@ -119,6 +123,7 @@ class eventForm(forms.ModelForm):
         return arrangement
 
 class eventFormAdmin(eventForm):
+    """Setup for the event form for an admin user"""
     CHOICES = [('strikkekveld', 'strikkekveld'),
                ('kurs', 'kurs'),
                ('utfordring', 'utfordring')]
@@ -132,6 +137,7 @@ class eventFormAdmin(eventForm):
         super().__init__(*args, **kwargs)
 
 class eventFormBedrift(eventForm):
+    """Setup for the event form for an Bedrift user"""
     CHOICES = [('kurs', 'kurs'), ('utfordring', 'utfordring')]
     type_select = forms.ChoiceField(choices=CHOICES, widget=forms.RadioSelect)
 
@@ -143,6 +149,7 @@ class eventFormBedrift(eventForm):
         super().__init__(*args, **kwargs)
 
 class eventFormBruker(eventForm):
+    """Setup for the event form for an ordinary user"""
     CHOICES = [('strikkekveld', 'strikkekveld')]
     type_select = forms.ChoiceField(choices=CHOICES, widget=forms.RadioSelect)
 
