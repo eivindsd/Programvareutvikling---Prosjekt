@@ -1,5 +1,7 @@
 from website.models import Bruker
 
+"""Class for verifying user"""
+
 class BrukerAuth(object):
     def authenticate(self, username=None, password=None):
         try:
