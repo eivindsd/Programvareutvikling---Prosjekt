@@ -1,6 +1,8 @@
 from django.contrib import admin
 from . import models
 
+"""Decides what fields will be displayed at the admin site, must match the name in website.models"""
+
 class brukerAdmin(admin.ModelAdmin):
     list_display = ('username', 'email', 'strikkeNivaa', 'rolleId', 'is_superuser')
 
