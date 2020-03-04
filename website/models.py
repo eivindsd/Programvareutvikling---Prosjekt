@@ -16,8 +16,6 @@ class rolleBrukerManager(BaseUserManager):
         now = timezone.now()
         if not username:
             raise ValueError('The given username must be set')
-        #if not email or email == "" or email is None:
-            #raise ValueError('The given email must be set')
         if email:
             email = self.normalize_email(email)
         username = self.model.normalize_username(username)
@@ -53,28 +51,28 @@ class ArrangementManager(models.Manager):
 
     use_in_migrations = True
 
-    def _create_arrangement(self, type, title, innhold, forfatter, tidspunkt,location, **extra_fields):
+    def _create_arrangement(self, type, title, innhold, forfatter, tidspunkt, location, **extra_fields):
         """override"""
         if not type:
-            raise ValueError('Er dette arrangemant et kurs eller en strikkekveld')
+            raise ValueError('Er dette ett arrangemant ett kurs eller en strikkekveld')
         arrangement = Arrangement(type=type, title=title, tidspunkt=tidspunkt, innhold=innhold, location=location, forfatter=forfatter)
         arrangement.save()
         return arrangement
 
-    def create_kurs(self, title, innhold, forfatter, tidspunkt,location, **extra_fields):
+    def create_kurs(self, title, innhold, forfatter, tidspunkt, location, **extra_fields):
         if forfatter.is_bedrift or forfatter.is_superuser:
-            return self._create_arrangement('kurs', title, innhold, forfatter, tidspunkt,location, **extra_fields)
+            return self._create_arrangement('kurs', title, innhold, forfatter, tidspunkt, location, **extra_fields)
         else:
             return 'Du er ikke en bedrift og kan derfor ikke lage kurs!'
 
-    def create_strikkeKveld(self, title, innhold, forfatter, tidspunkt,location, **extra_fields):
+    def create_strikkeKveld(self, title, innhold, forfatter, tidspunkt, location, **extra_fields):
         if forfatter.is_bedrift:
-            return 'Du er ikke en vanlif bruker og kan derfor ikke lage en strikke kveld!'
-        return self._create_arrangement('strikke kveld', title, innhold, forfatter, tidspunkt,location, **extra_fields)
+            return 'Du er ikke en vanlig bruker og kan derfor ikke lage en strikkekveld!'
+        return self._create_arrangement('strikkekveld', title, innhold, forfatter, tidspunkt, location, **extra_fields)
 
-    def create_utfordring(self, title, innhold, forfatter, tidspunkt,location, **extra_fields):
+    def create_utfordring(self, title, innhold, forfatter, tidspunkt, location, **extra_fields):
         if forfatter.is_bedrift or forfatter.is_superuser:
-            return self._create_arrangement('utfordring', title, innhold, forfatter, tidspunkt,location, **extra_fields)
+            return self._create_arrangement('utfordring', title, innhold, forfatter, tidspunkt, location, **extra_fields)
         else:
             raise ValueError('Du er ikke en bedrift og kan derfor ikke lage kurs!')
 
@@ -156,8 +154,8 @@ class Arrangement(models.Model):
 
     #add rolleId
     def get_strikeKvelder(self):
-        strikeKvelder = Arrangement.objects.filter(title='strikke kveld')
-        return strikeKvelder
+        strikkeKvelder = Arrangement.objects.filter(title='strikkekveld')
+        return strikkeKvelder
 
     def get_kurs(self):
         kurs = Arrangement.objects.filter(title='kurs')
@@ -168,8 +166,8 @@ class Arrangement(models.Model):
         return utfordringer
 
     def get_mineStrikeKvelder(self, bruker):
-        strikeKvelder = Arrangement.objects.filter(title='strikke kveld', forfatter=bruker)
-        return strikeKvelder
+        strikkeKvelder = Arrangement.objects.filter(title='strikkekveld', forfatter=bruker)
+        return strikkeKvelder
 
     def get_mineKurs(self, bruker):
         kurs = Arrangement.objects.filter(title='kurs', forfatter=bruker)
