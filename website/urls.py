@@ -2,6 +2,8 @@ from django.urls import path
 from . import views
 from users import views as user_views
 
+"""Creates the url path to the different templates, sends the request to 'views' file"""
+
 urlpatterns = [
     path('', views.startPage, name="startPage"),
     path("events/", views.events, name="events"),
