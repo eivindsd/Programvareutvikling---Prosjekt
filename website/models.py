@@ -239,3 +239,5 @@ class innlegg(models.Model):
         return list_id
 
 
+
+
