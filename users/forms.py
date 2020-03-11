@@ -194,3 +194,8 @@ class postForm(forms.ModelForm):
         """Returns the user who is currently logged in"""
         current_user = self.user
         return current_user
+
+    def save(self, *args, **kwargs):
+        data = self.cleaned_data
+        nyInnlegg = innlegg(text=data['text'], bruker=self.getUser())
+        nyInnlegg.save()
