@@ -15,3 +15,9 @@ class arrangementAdmin(admin.ModelAdmin):
 
 
 admin.site.register(models.Arrangement, arrangementAdmin)
+
+class deltokAdmin(admin.ModelAdmin):
+    list_display = ('arrangement', 'bruker')
+
+
+admin.site.register(models.deltokArrangement, deltokAdmin)
