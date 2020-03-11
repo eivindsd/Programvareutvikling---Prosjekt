@@ -185,6 +185,12 @@ class postForm(forms.ModelForm):
         model = innlegg
         fields = ('text',)
 
+
     def __init__(self, *args, **kwargs):
         self.user = kwargs.pop('user', None)
         super().__init__(*args, **kwargs)
+
+    def getUser(self):
+        """Returns the user who is currently logged in"""
+        current_user = self.user
+        return current_user
