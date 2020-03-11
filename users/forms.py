@@ -1,6 +1,6 @@
 from django import forms
 from django.utils.translation import gettext, gettext_lazy as _
-from website.models import Bruker, Arrangement
+from website.models import Bruker, Arrangement, innlegg
 from django.contrib.auth.forms import UserCreationForm
 
 """Class for the different forms used on the site"""
@@ -175,4 +175,16 @@ class showArrangementerForm(forms.ModelForm):
         readonly = ('title', 'time', 'location', 'text')
 
     def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+
+class postForm(forms.ModelForm):
+
+    text = forms.CharField(widget=forms.Textarea, label='Tekst')
+
+    class Meta():
+        model = innlegg
+        fields = ('text',)
+
+    def __init__(self, *args, **kwargs):
+        self.user = kwargs.pop('user', None)
         super().__init__(*args, **kwargs)

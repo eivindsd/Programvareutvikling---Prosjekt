@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from users.forms import eventFormAdmin, eventFormBedrift, eventFormBruker
+from users.forms import eventFormAdmin, eventFormBedrift, eventFormBruker, postForm
 from django.contrib import messages
 from website.models import Arrangement, deltokArrangement
 
@@ -72,3 +72,13 @@ def createEvent(request):
                 form = eventFormBruker(user=request.user)
     return render(request, "website/createEvent.html", {'form': form})
 
+
+def createPost(request):
+    if request.method == 'POST':
+        form = postForm(request.POST, user=request.user)
+        if form.is_valid():
+            form.save()
+            return redirect('profile')
+    else:
+        form = postForm()
+    return render(request, "website/createPost.html", {'form': form})
