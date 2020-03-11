@@ -21,3 +21,8 @@ class deltokAdmin(admin.ModelAdmin):
 
 
 admin.site.register(models.deltokArrangement, deltokAdmin)
+
+class innleggAdmin(admin.ModelAdmin):
+    list_display = ('bruker', 'text')
+
+admin.site.register(models.innlegg, innleggAdmin)
