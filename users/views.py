@@ -1,5 +1,7 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
+
+from website.models import Arrangement
 from .forms import UserRegisterForm
 
 """Redirects an url-request to the correct html-template, also displays the appropriate form if needed"""
@@ -19,7 +21,8 @@ def register(request):
 
 @login_required
 def profile(request):
-    return render(request, 'users/profile.html')
+    contex = {"mineArrangementer": Arrangement.getMyArrangement(Arrangement, request.user)}
+    return render(request, "users/profile.html", contex)
 
 def login(request):
     return render(request, 'users/login.html')

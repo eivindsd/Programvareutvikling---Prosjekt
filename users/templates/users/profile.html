@@ -3,6 +3,7 @@
 {% block content %}
     <h1>Min profil</h1>
 
+    <h3>Mine Innlegg</h3>
 {% endblock content %}
 
 {% block sidebar %}
@@ -28,3 +29,19 @@
           </div>
         </div>
 {% endblock sidebar %}
+
+{% block arrangementer %}
+    <div class="col-md-4">
+          <div class="content-section">
+              <h3>Mine Arrangementer</h3>
+              {% for arr in mineArrangementer %}
+                <div>
+                    {{ arr.type }} {{ arr.title }}
+                    Dato: {{ arr.tidspunkt }}
+                    Mer informasjon: {{arr.innhold}}
+                </div>
+              {% endfor %}
+          </div>
+    </div>
+    <br>
+{% endblock arrangementer %}

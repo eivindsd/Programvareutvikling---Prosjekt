@@ -39,10 +39,6 @@ def startPage(request):
     return render(request, "website/startPage.html")
 
 
-def profile(request):
-    contex = {}
-    return render(request, "website/profile.html")
-
 
 def createEvent(request):
     if request.method == 'POST':
