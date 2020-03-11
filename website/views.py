@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from users.forms import eventFormAdmin, eventFormBedrift, eventFormBruker
 from django.contrib import messages
-from website.models import Arrangement
+from website.models import Arrangement, deltokArrangement
 
 """Loads the correct template and form (when needed)"""
 
@@ -14,10 +14,21 @@ def home(request):
 def events(request):
     #change this to see all and mine
     if request.method == 'POST':
-        print("Meld deg på! Request: {} ".format(request.POST.get('arrId')))
+        arrId = request.POST.get('arrId')
+        if request.POST.get('meldPaa') != None:
+            participated = deltokArrangement.objects.participate(request.user, arrId)
+            if participated == False:
+                messages.error(request, f'Du er allerede meldt på dette arrangementet!')
+        elif request.POST.get('meldAv') != None:
+            deleted = deltokArrangement.objects.unregister(request.user, arrId)
+            if deleted == False:
+                messages.error(request, f'Fant ikke dette arrangementet!')
+
+    alleDeltok = deltokArrangement.getMyArrangementId(deltokArrangement, request.user)
     contex = {
         'arrangementer': Arrangement.get_all(Arrangement),
-        'user' : request.user
+        'user': request.user,
+        'alledeltok': alleDeltok,
     }
     return render(request, "website/events.html", contex)
 
