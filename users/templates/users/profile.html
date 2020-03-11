@@ -9,6 +9,14 @@
             </form>
     </div>
     <h3>Mine Innlegg</h3>
+    {% for innlegg in mineInnlegg %}
+        <div class="card" style="margin-bottom: 15px">
+                  <div class="card-body">
+                    <p class="card-subtitle mb-2 text-muted">Dato: {{ innlegg.dateTime }}</p>
+                    <h6 class="card-title">{{ innlegg.text}}</h6>
+                  </div>
+              </div>
+    {% endfor %}
 {% endblock content %}
 
 {% block sidebar %}

@@ -238,6 +238,10 @@ class innlegg(models.Model):
                 list_id.append(post.innlegg.id)
         return list_id
 
+    def getMyPosts(self, user):
+        Posts = innlegg.objects.filter(bruker=user)
+        return Posts
+
 
 
 
