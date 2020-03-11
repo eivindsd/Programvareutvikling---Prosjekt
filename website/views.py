@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from users.forms import eventFormAdmin, eventFormBedrift, eventFormBruker, postForm
+from users.forms import eventFormAdmin, eventFormBedrift, eventFormBruker, postForm, eventForm
 from django.contrib import messages
 from website.models import Arrangement, deltokArrangement
 
@@ -42,22 +42,25 @@ def startPage(request):
 
 def createEvent(request):
     if request.method == 'POST':
-        if request.user:
-            if request.user.get_bruker_type() == 'admin':
-                form = eventFormAdmin(request.POST, user=request.user)
-            elif request.user.get_bruker_type() == 'bedrift':
-                form = eventFormBedrift(request.POST, user=request.user)
+        if request.POST.get('opprett') == None:
+            if request.user:
+                if request.user.get_bruker_type() == 'admin':
+                    form = eventFormAdmin(request.POST, user=request.user)
+                elif request.user.get_bruker_type() == 'bedrift':
+                    form = eventFormBedrift(request.POST, user=request.user)
+                else:
+                    form = eventFormBruker(request.POST, user=request.user)
             else:
-                form = eventFormBruker(request.POST, user=request.user)
+                print("Error user!")
+                return False
+            if form.is_valid():
+                form.save()
+                title = form.cleaned_data.get('title')
+                type_select = form.cleaned_data.get('type_select')
+                messages.success(request, f'{type_select} opprettet for {title}')
+                return redirect('events')
         else:
-            print("Error user!")
-            return False
-        if form.is_valid():
-            form.save()
-            title = form.cleaned_data.get('title')
-            type_select = form.cleaned_data.get('type_select')
-            messages.success(request, f'{type_select} opprettet for {title}')
-            return redirect('events')
+            form = eventForm(user=request.user)
     else:
         if request.user:
             if request.user.get_bruker_type() == 'admin':
@@ -71,10 +74,12 @@ def createEvent(request):
 
 def createPost(request):
     if request.method == 'POST':
-        form = postForm(request.POST, user=request.user)
-        if form.is_valid():
-            form.save()
-            return redirect('profile')
+        if request.POST.get('nytt') == None:
+            form = postForm(request.POST, user=request.user)
+            if form.is_valid():
+                form.save()
+                return redirect('profile')
+        else: form = postForm()
     else:
         form = postForm()
     return render(request, "website/createPost.html", {'form': form})
