@@ -51,7 +51,7 @@ class UserRegisterForm(UserCreationForm):
     def save(self, *args, **kwargs):
         """Creates the correct user type and stores it in the database"""
         data = self.cleaned_data
-        if data['type_select'] == ['bedrift']:
+        if data['type_select'] == 'bedrift':
             bruker = Bruker.objects.create_bedrift(
                 username=data['username'],
                 email=data['email'],

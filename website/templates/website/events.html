@@ -22,10 +22,12 @@
                     <h6 class="card-title">Sted: {{ arr.location }}</h6>
                     <p class="card-text">Mer informasjon: {{arr.innhold}} </p>
                     <input type="hidden" name="arrId" value={{arr.id}}>
+                    {% if user.is_bedrift != True %}
                     {% if arr.id in alledeltok %}
                     <input type="submit" name="meldAv" value="Meld deg av" class="btn btn-primary" style="background-color:#E01717; border-color:#E01717;"/>
                     {% else %}
                     <input type="submit" name="meldPaa" value="Meld deg på" class="btn btn-primary"/>
+                    {% endif %}
                     {% endif %}
                 </div>
             </div>
