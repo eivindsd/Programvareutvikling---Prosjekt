@@ -64,23 +64,10 @@
             {% endif %}
           {% block content %}{% endblock %}
         </div>
-        <div class="col-md-4">
-          <div class="content-section">
-            <h3>Sidebar</h3>
-            <p class='text-muted'>Strikking er gøy! :)
-              <ul class="list-group">
-                <li class="list-group-item list-group-item-light">Nylige innlegg</li>
-                <li class="list-group-item list-group-item-light">Kunngjøringer</li>
-                <li class="list-group-item list-group-item-light">Arrangementer</li>
-                <li class="list-group-item list-group-item-light">Strikkekvelder</li>
-              </ul>
-            </p>
-          </div>
-        </div>
+          {% block sidebar %}{% endblock %}
+
       </div>
 </main>
-
-
 
 
      <!-- Optional JavaScript -->
