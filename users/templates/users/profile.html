@@ -2,7 +2,15 @@
 {% load crispy_forms_tags %}
 {% block content %}
     <h1>Min profil</h1>
-
+    <h3>Mine Arrangementer</h3>
+    {% for arr in mineArrangementer %}
+        <div>
+            {{ arr.type }}
+            {{ arr.title }}
+            Dato: {{ arr.tidspunkt }}
+            Mer informasjon: {{arr.innhold}}
+        </div>
+    {% endfor %}
 {% endblock content %}
 
 {% block sidebar %}
