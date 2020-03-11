@@ -12,11 +12,11 @@
             <h2>{{ user.first_name }}  {{ user.last_name }}</h2>
             <p class='text-muted'>
                 {% if user.is_superuser %}
-                    Du er en adminbruker
+                    Adminbruker
                 {% elif user.is_bedrift %}
-                    Du er en bedriftsbruker
+                    Bedriftsbruker
                 {% else %}
-                    Du er en vanlig strikkebruker
+                    Privatbruker
                 {% endif %}
             </p>
               <ul class="list-group">
@@ -31,17 +31,18 @@
 {% endblock sidebar %}
 
 {% block arrangementer %}
-    <div class="col-md-4">
+    <div class="col-md-4" style="height: 100%">
           <div class="content-section">
-              <h3>Mine Arrangementer</h3>
+              <h4 style="padding-bottom: 10px;" >Mine arrangementer:</h4>
               {% for arr in mineArrangementer %}
-                <div>
-                    {{ arr.type }} {{ arr.title }}
-                    Dato: {{ arr.tidspunkt }}
-                    Mer informasjon: {{arr.innhold}}
-                </div>
+              <div class="card" style="margin-bottom: 15px">
+                  <div class="card-body">
+                    <h5 class="card-title">{{ arr.title }} {{ arr.type }}</h5>
+                    <h6 class="card-subtitle mb-2 text-muted">Dato: {{ arr.tidspunkt }}</h6>
+                     <p class="card-text">{{arr.innhold}}</p>
+                  </div>
+              </div>
               {% endfor %}
           </div>
     </div>
-    <br>
 {% endblock arrangementer %}
