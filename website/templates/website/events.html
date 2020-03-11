@@ -2,9 +2,9 @@
 {% block content %}
     <div style="display: table">
         <h1 style="margin-bottom: 2rem; display: inline">Arrangementer</h1>
-        <form action="/createEvent/">
+        <form method="POST" action="/createEvent/">
             {% csrf_token %}
-            <input type="submit" value="Opprett" class="btn btn-primary" style="display: table-cell; position: absolute; right: 0; vertical-align: middle"/>
+            <input type="submit" name="opprett" value="Opprett" class="btn btn-primary" style="display: table-cell; position: absolute; right: 0; vertical-align: middle"/>
         </form>
 
     </div>

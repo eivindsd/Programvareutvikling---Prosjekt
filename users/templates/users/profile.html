@@ -3,9 +3,9 @@
 {% block content %}
     <h1>Min profil</h1>
     <div style="display: table">
-        <form action="/createPost/">
+        <form method="POST" action="/createPost/">
                 {% csrf_token %}
-                <input type="submit" value="Nytt innlegg" class="btn btn-primary" style="display: table-cell; position: absolute; right: 0; vertical-align: middle"/>
+                <input type="submit" value="Nytt innlegg" name="nytt" class="btn btn-primary" style="display: table-cell; position: absolute; right: 0; vertical-align: middle"/>
             </form>
     </div>
     <h3>Mine Innlegg</h3>
