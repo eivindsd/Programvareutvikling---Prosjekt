@@ -5,6 +5,7 @@ from django.utils import timezone
 from django.contrib.auth.base_user import BaseUserManager
 from django.utils.translation import gettext_lazy as _
 from django.contrib.auth.models import AbstractUser
+from datetime import datetime
 
 """Different models for the database, as well as methods to register entities"""
 
@@ -219,5 +220,22 @@ class deltokArrangement(models.Model):
                 list_id.append(arr.arrangement.id)
         return list_id
 
+
+class innlegg(models.Model):
+
+    text = models.TextField()
+    bruker = models.ForeignKey(Bruker, on_delete=models.CASCADE, blank=True, null=True, default=None)
+    dateTime = models.DateTimeField(default=datetime.now())
+
+    class Meta():
+        verbose_name = 'Innlegg'
+        verbose_name_plural = 'Innlegg'
+
+    def getPostIds(self, user):
+        list_id = []
+        for post in innlegg.objects.all():
+            if post.bruker == user:
+                list_id.append(post.innlegg.id)
+        return list_id
 
 
