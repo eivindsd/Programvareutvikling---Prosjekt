@@ -2,7 +2,12 @@
 {% load crispy_forms_tags %}
 {% block content %}
     <h1>Min profil</h1>
-
+    <div style="display: table">
+        <form action="/createPost/">
+                {% csrf_token %}
+                <input type="submit" value="Nytt innlegg" class="btn btn-primary" style="display: table-cell; position: absolute; right: 0; vertical-align: middle"/>
+            </form>
+    </div>
     <h3>Mine Innlegg</h3>
 {% endblock content %}
 
