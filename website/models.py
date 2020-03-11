@@ -196,6 +196,11 @@ class Arrangement(models.Model):
         utfordringer = Arrangement.objects.filter(title='utfordring', forfatter=bruker)
         return utfordringer
 
+    def getMyArrangement(self, bruker):
+        list_arrangementer = Arrangement.objects.filter(forfatter=bruker)
+        return list_arrangementer
+
+
     def get_all(self):
         return Arrangement.objects.all()
 
@@ -213,7 +218,6 @@ class deltokArrangement(models.Model):
             if arr.bruker == user:
                 list_id.append(arr.arrangement.id)
         return list_id
-
 
 
 

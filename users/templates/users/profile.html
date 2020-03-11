@@ -1,31 +1,30 @@
 {% extends "website/base.html" %}
 {% load crispy_forms_tags %}
 {% block content %}
-    <h1>{{ user.first_name }}  {{ user.last_name }}</h1>
-    <p> {% if user.is_superuser %}
-            Du er en adminbruker
-        {% elif user.is_bedrift %}
-            Du er en bedriftsbruker
-        {% else %}
-            Du er en vanlig strikkebruker
-        {% endif %}
-    </p>
-    <table border="0">
-  <tr>
-    <td><b>E-post:</b> <p>{{ user.email }}</p></td>
-  </tr>
-  <tr>
-    <td><b>Brukernavn:</b> <p>{{ user.username }}</p></td>
-  </tr>
-   <tr>
-    <td><b>Strikkenivå:</b> <p>{{ user.strikkeNivaa }}</p></td>
-  </tr>
-   <tr>
-    <td><b>Fødselsdato:</b><p>{{ user.bursdag | date:"d/m/Y" }}</p> </td>
-  </tr>
-</table>
-
-
+    <h1>Min profil</h1>
 
 {% endblock content %}
 
+{% block sidebar %}
+    <div class="col-md-4">
+          <div class="content-section">
+            <h2>{{ user.first_name }}  {{ user.last_name }}</h2>
+            <p class='text-muted'>
+                {% if user.is_superuser %}
+                    Du er en adminbruker
+                {% elif user.is_bedrift %}
+                    Du er en bedriftsbruker
+                {% else %}
+                    Du er en vanlig strikkebruker
+                {% endif %}
+            </p>
+              <ul class="list-group">
+                <li class="list-group-item list-group-item-light"><b>E-post: </b>{{ user.email }}</li>
+                <li class="list-group-item list-group-item-light"><b>Brukernavn: </b>{{ user.username }}</li>
+                <li class="list-group-item list-group-item-light"><b>Strikkenivå: </b>{{ user.strikkeNivaa }}</li>
+                <li class="list-group-item list-group-item-light"><b>Fødselsdato: </b>{{ user.bursdag | date:"d/m/Y" }}</li>
+              </ul>
+            </p>
+          </div>
+        </div>
+{% endblock sidebar %}

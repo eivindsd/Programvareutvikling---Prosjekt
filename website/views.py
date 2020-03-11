@@ -40,6 +40,7 @@ def startPage(request):
 
 
 def profile(request):
+    contex = {}
     return render(request, "website/profile.html")
 
 
