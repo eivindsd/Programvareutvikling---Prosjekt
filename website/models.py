@@ -77,6 +77,25 @@ class ArrangementManager(models.Manager):
         else:
             raise ValueError('Du er ikke en bedrift og kan derfor ikke lage kurs!')
 
+class deltokArrangementManager(models.Manager):
+    def participate(self, bruker, arrId):
+        try:
+            arr = Arrangement.objects.get(id=arrId)
+        except:
+            return False
+        if len(deltokArrangement.objects.filter(arrangement=arr, bruker=bruker)) > 0:
+            return False
+        deltok = deltokArrangement(arrangement=arr, bruker=bruker)
+        deltok.save()
+        return deltok
+
+    def unregister(self, bruker, arrId):
+        try:
+            arr = Arrangement.objects.get(id=arrId)
+        except:
+            return False
+        return deltokArrangement.objects.filter(arrangement=arr, bruker=bruker).delete()
+
 
 
 class Rolle(models.Model):
@@ -184,4 +203,17 @@ class Arrangement(models.Model):
 class deltokArrangement(models.Model):
     arrangement = models.ForeignKey(Arrangement, on_delete=models.CASCADE, blank=True, null=True, default=None)
     bruker = models.ForeignKey(Bruker, on_delete=models.CASCADE, blank=True, null=True, default=None)
+
+    objects = deltokArrangementManager()
+
+    def getMyArrangementId(self, user):
+        """ Get all the id-s of the registered events for this user"""
+        list_id = []
+        for arr in deltokArrangement.objects.all():
+            if arr.bruker == user:
+                list_id.append(arr.arrangement.id)
+        return list_id
+
+
+
 
