@@ -26,3 +26,9 @@ class innleggAdmin(admin.ModelAdmin):
     list_display = ('bruker', 'text')
 
 admin.site.register(models.innlegg, innleggAdmin)
+
+
+class messagesAdmin(admin.ModelAdmin):
+    list_display = ('content', 'author')
+
+admin.site.register(models.Messages, messagesAdmin)

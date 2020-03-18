@@ -215,7 +215,7 @@ class sendMessageForm(forms.ModelForm):
         fields = ('content',)
 
     def __init__(self, *args, **kwargs):
-        self.content = kwargs.pop('content', None)
+        self.user = kwargs.pop('user', None)
         super().__init__(*args, **kwargs)
 
     def getContent(self):
@@ -223,6 +223,13 @@ class sendMessageForm(forms.ModelForm):
         current_content = self.content
         return current_content
 
+    def getUser(self):
+        """Returns the user who is currently logged in"""
+        current_user = self.user
+        return current_user
+
     def save(self, *args, **kwargs):
         """Creates the correct event-type and stores it in the database"""
         data = self.cleaned_data  #Gets the data from the form, stores it as a dict
+        melding = Messages(content=data['content'], author=self.getUser())
+        melding.save()
