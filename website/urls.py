@@ -13,5 +13,6 @@ urlpatterns = [
     path("logIn/", user_views.login, name="logIn"),
     path("home/", views.home, name="home"),
     path("createPost/", views.createPost, name="createPost")
+    path("messages/", views.messages, name="messages"),
 ]
 

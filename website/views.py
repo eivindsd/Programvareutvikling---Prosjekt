@@ -83,3 +83,8 @@ def createPost(request):
     else:
         form = postForm()
     return render(request, "website/createPost.html", {'form': form})
+
+def messages(request):
+    if not request.user.is_authenticated:
+        return redirect('startPage')
+    return render(request, "website/messages.html")
