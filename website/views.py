@@ -60,3 +60,7 @@ def createEvent(request):
                 form = eventFormBruker(user=request.user)
     return render(request, "website/createEvent.html", {'form': form})
 
+def messages(request):
+    if not request.user.is_authenticated:
+        return redirect('startPage')
+    return render(request, "website/messages.html")

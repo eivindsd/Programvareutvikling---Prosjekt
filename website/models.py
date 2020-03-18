@@ -185,3 +185,24 @@ class deltokArrangement(models.Model):
     arrangement = models.ForeignKey(Arrangement, on_delete=models.CASCADE, blank=True, null=True, default=None)
     bruker = models.ForeignKey(Bruker, on_delete=models.CASCADE, blank=True, null=True, default=None)
 
+
+
+class Messages(models.Model):
+    """DB model for messages"""
+    author = models.ForeignKey(Bruker, on_delete=models.CASCADE, null=True, default=None)
+    #receiver = models.ForeignKey(Bruker, on_delete=models.CASCADE, null=True, default=None)
+    date = models.DateTimeField(default=timezone.now)
+    content = models.TextField()
+
+
+    def __str__(self):
+        return self.content
+
+    class Meta:
+        verbose_name = ('message')
+        verbose_name_plural = ('messages')
+
+    def get_utfordringer(self):
+        utfordringer = Messages.objects.filter(title='author')
+        utfordringer += Messages.objects.filter(title='receiver')
+        return utfordringer
