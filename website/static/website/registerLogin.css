@@ -1,0 +1,54 @@
+body, html {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    font-family: "Montserrat", sans-serif;
+    background-color: beige;
+}
+.content-section{
+    width: 40%;
+    margin: auto;
+    margin-top: 2.5%;
+}
+
+small{
+    display: flex;
+    justify-content: center;
+}
+
+#overskrift{
+    display: flex;
+    justify-content: center;
+    padding-bottom: 15px;
+}
+#submit {
+    width: 100%;
+    border-color: #FFA833;
+    margin-bottom: 25px;
+    background-color: #FFA833;
+    color: #FFFFFF;
+    border-radius: 30px;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: block;
+    font-size: 15px;
+    cursor: pointer;
+}
+#submit:hover{
+    background-color: #EF9720;
+    transition: all .4s ease;
+}
+#registrer{
+    color: #FFA833;
+    margin-bottom: 30px;
+}
+img {
+    display: flex;
+    margin: auto;
+    margin-top: 3%;
+}
+fieldset{
+    width: 97%;
+    margin: auto;
+}
