@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from users.forms import eventFormAdmin, eventFormBedrift, eventFormBruker, postForm, eventForm
+from users.forms import eventFormAdmin, eventFormBedrift, eventFormBruker, postForm, eventForm, sendMessageForm
 from django.contrib import messages
 from website.models import Arrangement, deltokArrangement
 
@@ -85,6 +85,15 @@ def createPost(request):
     return render(request, "website/createPost.html", {'form': form})
 
 def messages(request):
+    if request.method == 'POST':
+        if request.POST.get('SendMessageForm') == None:
+            form = sendMessageForm(request.POST, user=request.user)
+            if form.is_valid():
+                form.save()
+                return redirect('profile')
+        else: form = sendMessageForm()
+    else:
+        form = sendMessageForm()
     if not request.user.is_authenticated:
         return redirect('startPage')
-    return render(request, "website/messages.html")
+    return render(request, "website/messages.html", {"form": form})

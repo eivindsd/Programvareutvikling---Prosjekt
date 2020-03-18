@@ -6,20 +6,13 @@
 
 {% block content %}
      <div class="content-section">
-        <form action="SendMessageForm" method="post">
+        <form action="SendMessageForm" method="POST">
 
             <fieldset class="form-group">
                 <legend class="border-bottom mb-4">Create Message</legend>
-
+                {{ form|crispy }}
 
             </fieldset>
-            <textarea
-                    id="receiver" rows="1" cols="40"> hvem vil du sende til?
-            </textarea>
-            <textarea
-                    id="content" rows="4" cols="40"> skriv meldingen din her...
-            </textarea>
-
             <div class="form-group">
                 <input type="text"><button class="btn btn-outline-info" type="submit" >Send Message</button>
             </div>
