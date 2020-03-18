@@ -7,17 +7,16 @@
 {% block content %}
      <div class="content-section">
         <form action="SendMessageForm" method="post">
-            {% csrf_token %}
+
             <fieldset class="form-group">
                 <legend class="border-bottom mb-4">Create Message</legend>
-                {{ form|crispy }}
+
 
             </fieldset>
-            <input type="text"><textarea
+            <textarea
                     id="receiver" rows="1" cols="40"> hvem vil du sende til?
             </textarea>
-
-            <input type="text"><textarea
+            <textarea
                     id="content" rows="4" cols="40"> skriv meldingen din her...
             </textarea>
 
@@ -33,17 +32,3 @@
 
 
 
-
-
-
-modified:   db.sqlite3
-        modified:   users/forms.py
-        deleted:    users/migrations/__init__.py
-        deleted:    website/migrations/0001_initial.py
-        deleted:    website/migrations/0002_auto_20200304_1233.py
-        deleted:    website/migrations/__init__.py
-        modified:   website/models.py
-        modified:   website/templates/website/base.html
-        new file:   website/templates/website/messages.html
-        modified:   website/urls.py
-        modified:   website/views.py
