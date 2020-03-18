@@ -203,16 +203,19 @@ class postForm(forms.ModelForm):
         nyInnlegg.save()
 
 
-
 class sendMessageForm(forms.ModelForm):
     """Form to create and send message"""
-    ##må jeg lage post-metode ine her?
-
+    CHOICES = []
+    allUsers = Bruker.get_all_dict(Bruker)
+    print(allUsers)
+    for userID in allUsers:
+        CHOICES.append((userID, allUsers[userID]))
+    mottaker = forms.CharField(widget=forms.Select(choices=CHOICES))
     content = forms.CharField(widget=forms.Textarea, label='Tekst')
 
     class Meta():
         model = Messages
-        fields = ('content',)
+        fields = ('content', 'mottaker')
 
     def __init__(self, *args, **kwargs):
         self.user = kwargs.pop('user', None)
@@ -231,5 +234,7 @@ class sendMessageForm(forms.ModelForm):
     def save(self, *args, **kwargs):
         """Creates the correct event-type and stores it in the database"""
         data = self.cleaned_data  #Gets the data from the form, stores it as a dict
-        melding = Messages(content=data['content'], author=self.getUser())
+        allUsers = Bruker.get_all_dict(Bruker)
+        mottaker = allUsers[int(data['mottaker'])]
+        melding = Messages(content=data['content'], author=self.getUser(), receiver=mottaker)
         melding.save()

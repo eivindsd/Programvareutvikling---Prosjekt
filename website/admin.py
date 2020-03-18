@@ -29,6 +29,6 @@ admin.site.register(models.innlegg, innleggAdmin)
 
 
 class messagesAdmin(admin.ModelAdmin):
-    list_display = ('content', 'author')
+    list_display = ('content', 'author', 'receiver')
 
 admin.site.register(models.Messages, messagesAdmin)

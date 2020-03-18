@@ -97,6 +97,10 @@ class deltokArrangementManager(models.Manager):
             return False
         return deltokArrangement.objects.filter(arrangement=arr, bruker=bruker).delete()
 
+class MessagesManager(models.Manager):
+    pass
+
+
 
 
 class Rolle(models.Model):
@@ -152,6 +156,15 @@ class Bruker(AbstractUser):
             return 'bedrift'
         else:
             return 'vanlig_bruker'
+
+    def get_all(self):
+        return Bruker.objects.all()
+
+    def get_all_dict(self):
+        users = {}
+        for b in Bruker.objects.all():
+            users[b.id] = b
+        return users
 
 class Arrangement(models.Model):
     """DB model for events"""
@@ -244,14 +257,14 @@ class innlegg(models.Model):
 
 
 
-
-
 class Messages(models.Model):
     """DB model for messages"""
-    author = models.ForeignKey(Bruker, on_delete=models.CASCADE, null=True, default=None)
-    #receiver = models.ForeignKey(Bruker, on_delete=models.CASCADE, null=True, default=None)
+    author = models.ForeignKey(Bruker, on_delete=models.CASCADE, null=True, default=None, related_name='author')
+    receiver = models.ForeignKey(Bruker, on_delete=models.CASCADE, null=True, default=None, related_name='receiver')
     date = models.DateTimeField(default=timezone.now)
     content = models.TextField()
+
+    objects = MessagesManager()
 
 
     def __str__(self):
@@ -260,8 +273,3 @@ class Messages(models.Model):
     class Meta:
         verbose_name = ('message')
         verbose_name_plural = ('messages')
-
-    def get_utfordringer(self):
-        utfordringer = Messages.objects.filter(title='author')
-        utfordringer += Messages.objects.filter(title='receiver')
-        return utfordringer
