@@ -1,6 +1,7 @@
 from django import forms
 from django.utils.translation import gettext, gettext_lazy as _
 from website.models import Bruker, Arrangement, innlegg
+from website.models import Bruker, Arrangement, Messages
 from django.contrib.auth.forms import UserCreationForm
 
 """Class for the different forms used on the site"""
@@ -177,6 +178,7 @@ class showArrangementerForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
 
+
 class postForm(forms.ModelForm):
 
     text = forms.CharField(widget=forms.Textarea, label='Tekst')
@@ -199,3 +201,40 @@ class postForm(forms.ModelForm):
         data = self.cleaned_data
         nyInnlegg = innlegg(text=data['text'], bruker=self.getUser())
         nyInnlegg.save()
+
+
+class sendMessageForm(forms.ModelForm):
+    """Form to create and send message"""
+    CHOICES = []
+    allUsers = Bruker.get_all_dict(Bruker)
+    print(allUsers)
+    for userID in allUsers:
+        CHOICES.append((userID, allUsers[userID]))
+    mottaker = forms.CharField(widget=forms.Select(choices=CHOICES))
+    content = forms.CharField(widget=forms.Textarea, label='Tekst')
+
+    class Meta():
+        model = Messages
+        fields = ('content', 'mottaker')
+
+    def __init__(self, *args, **kwargs):
+        self.user = kwargs.pop('user', None)
+        super().__init__(*args, **kwargs)
+
+    def getContent(self):
+        """Returns content from user"""
+        current_content = self.content
+        return current_content
+
+    def getUser(self):
+        """Returns the user who is currently logged in"""
+        current_user = self.user
+        return current_user
+
+    def save(self, *args, **kwargs):
+        """Creates the correct event-type and stores it in the database"""
+        data = self.cleaned_data  #Gets the data from the form, stores it as a dict
+        allUsers = Bruker.get_all_dict(Bruker)
+        mottaker = allUsers[int(data['mottaker'])]
+        melding = Messages(content=data['content'], author=self.getUser(), receiver=mottaker)
+        melding.save()
