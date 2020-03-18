@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from users.forms import eventFormAdmin, eventFormBedrift, eventFormBruker, postForm, eventForm
+from users.forms import eventFormAdmin, eventFormBedrift, eventFormBruker, postForm, eventForm, sendMessageForm
 from django.contrib import messages
 from website.models import Arrangement, deltokArrangement
 
@@ -12,7 +12,6 @@ def home(request):
 
 
 def events(request):
-    #change this to see all and mine
     if request.method == 'POST':
         arrId = request.POST.get('arrId')
         if request.POST.get('meldPaa') != None:
@@ -60,15 +59,15 @@ def createEvent(request):
                 messages.success(request, f'{type_select} opprettet for {title}')
                 return redirect('events')
         else:
-            form = eventForm(user=request.user)
+            if request.user:
+                if request.user.get_bruker_type() == 'admin':
+                    form = eventFormAdmin(user=request.user)
+                elif request.user.get_bruker_type() == 'bedrift':
+                    form = eventFormBedrift(user=request.user)
+                else:
+                    form = eventFormBruker(user=request.user)
     else:
-        if request.user:
-            if request.user.get_bruker_type() == 'admin':
-                form = eventFormAdmin(user=request.user)
-            elif request.user.get_bruker_type() == 'bedrift':
-                form = eventFormBedrift(user=request.user)
-            else:
-                form = eventFormBruker(user=request.user)
+        form = eventForm(user=request.user)
     return render(request, "website/createEvent.html", {'form': form})
 
 
@@ -83,3 +82,18 @@ def createPost(request):
     else:
         form = postForm()
     return render(request, "website/createPost.html", {'form': form})
+
+
+def message(request):
+    if request.method == 'POST':
+        if request.POST.get('SendMessageForm') == None:
+            form = sendMessageForm(request.POST, user=request.user)
+            if form.is_valid():
+                form.save()
+                return redirect('profile')
+        else: form = sendMessageForm(user=request.user)
+    else:
+        form = sendMessageForm(user=request.user)
+    if not request.user.is_authenticated:
+        return redirect('startPage')
+    return render(request, "website/messages.html", {"form": form})

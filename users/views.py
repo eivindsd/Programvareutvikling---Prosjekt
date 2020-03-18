@@ -1,6 +1,5 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
-
 from website.models import Arrangement, innlegg
 from .forms import UserRegisterForm
 
