@@ -207,7 +207,6 @@ class sendMessageForm(forms.ModelForm):
     """Form to create and send message"""
     CHOICES = []
     allUsers = Bruker.get_all_dict(Bruker)
-    print(allUsers)
     for userID in allUsers:
         CHOICES.append((userID, allUsers[userID]))
     mottaker = forms.CharField(widget=forms.Select(choices=CHOICES))
@@ -238,3 +237,21 @@ class sendMessageForm(forms.ModelForm):
         mottaker = allUsers[int(data['mottaker'])]
         melding = Messages(content=data['content'], author=self.getUser(), receiver=mottaker)
         melding.save()
+
+
+class AllUsersForm(forms.ModelForm):
+    """All Users in dropdown list"""
+    CHOICES = []
+    allUsers = Bruker.get_all_dict(Bruker)
+    for userID in allUsers:
+        CHOICES.append((userID, allUsers[userID]))
+    users = forms.CharField(widget=forms.Select(choices=CHOICES))
+    text = forms.IntegerField()
+
+    class Meta():
+        model = Bruker
+        fields = ('users',)
+
+    def __init__(self, *args, **kwargs):
+        self.user = kwargs.pop('user', None)
+        super().__init__(*args, **kwargs)
