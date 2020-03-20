@@ -1,14 +1,26 @@
 from django.shortcuts import render, redirect
-from users.forms import eventFormAdmin, eventFormBedrift, eventFormBruker, postForm, eventForm, sendMessageForm
+from users.forms import eventFormAdmin, eventFormBedrift, eventFormBruker, postForm, eventForm, sendMessageForm, AllUsersForm
 from django.contrib import messages
-from website.models import Arrangement, deltokArrangement
+from website.models import Arrangement, deltokArrangement, Messages, Bruker
 
 """Loads the correct template and form (when needed)"""
 
 def home(request):
     if not request.user.is_authenticated:
         return redirect('startPage')
-    return render(request, "website/home.html")
+    if request.method == 'POST':
+        form = AllUsersForm(request.POST, user=request.user)
+        if form.is_valid():
+            form.save()
+            return redirect('home')
+    else:
+        form = AllUsersForm(request.user)
+    contex = {
+        'mineMessages': Messages.getMyMessages(Messages, request.user),
+        'form': form,
+        'brukere': Bruker.get_all(Bruker),
+    }
+    return render(request, "website/home.html", contex)
 
 
 def events(request):

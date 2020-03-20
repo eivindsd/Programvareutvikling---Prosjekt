@@ -263,6 +263,7 @@ class Messages(models.Model):
     receiver = models.ForeignKey(Bruker, on_delete=models.CASCADE, null=True, default=None, related_name='receiver')
     date = models.DateTimeField(default=timezone.now)
     content = models.TextField()
+    answer = models.TextField(null=True)
 
     objects = MessagesManager()
 
@@ -273,3 +274,10 @@ class Messages(models.Model):
     class Meta:
         verbose_name = ('message')
         verbose_name_plural = ('messages')
+
+    def get_all(self):
+        return Messages.objects.all()
+
+    def getMyMessages(self, bruker):
+        list_messages = Messages.objects.filter(receiver=bruker)
+        return list_messages

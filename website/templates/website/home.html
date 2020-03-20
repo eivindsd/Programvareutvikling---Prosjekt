@@ -1,4 +1,40 @@
 {% extends "website/base.html" %}
+{% load crispy_forms_tags %}
 {% block content %}
-
+    <h1>Hjem</h1>
+    <br>
+    <h3>Mine Meldinger</h3>
+    {% for message in mineMessages %}
+        <div class="card" style="margin-bottom: 15px">
+                  <div class="card-body">
+                    <p class="card-subtitle mb-2 text-muted">Dato: {{ message.date }}</p>
+                    <h6 class="card-title">{{ message.content }}</h6>
+                    <input type="submit" name="svar" value="Svar" class="btn btn-primary"/>
+                  </div>
+              </div>
+    {% endfor %}
 {% endblock content %}
+
+{% block sidebar %}
+    <div class="col-md-4">
+          <div class="content-section">
+            <h2>Søk på andres profil</h2>
+              <fieldset class="form-group">
+                  <legend class="border-bottom mb-4">Alle brukere</legend>
+              </fieldset>
+              <form method="POST">
+                  {% csrf_token %}
+                  <select id="bruker">
+                    {%for bruker in brukere%}
+                      <option value="{{ bruker.id }}">{{ bruker }}</option>
+                    {% endfor %}
+                  </select>
+              <input type="submit" name="seProfil" value="Se Profil" class="btn btn-primary" />
+              </form>
+          </div>
+        </div>
+{% endblock sidebar %}
+
+{% block arrangementer %}
+
+{% endblock arrangementer %}
