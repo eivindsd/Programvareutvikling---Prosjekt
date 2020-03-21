@@ -1,0 +1,57 @@
+{% extends "website/base.html" %}
+{% load crispy_forms_tags %}
+{% block content %}
+    <h1>{{ user.first_name }}s profil</h1>
+
+    <h3>{{ user.first_name }}s Innlegg</h3>
+    {% for innlegg in Innlegg %}
+        <div class="card" style="margin-bottom: 15px">
+                  <div class="card-body">
+                    <p class="card-subtitle mb-2 text-muted">Dato: {{ innlegg.dateTime }}</p>
+                    <h6 class="card-title">{{ innlegg.text}}</h6>
+                  </div>
+              </div>
+    {% endfor %}
+{% endblock content %}
+
+{% block sidebar %}
+    <div class="col-md-4">
+          <div class="content-section">
+              <h2>{{ user.first_name }}  {{ user.last_name }}</h2>
+            <p class='text-muted'>
+                {% if user.is_superuser %}
+                    Admin
+                {% elif user.is_bedrift %}
+                    Bedrift
+                {% else %}
+                    Privatbruker
+                {% endif %}
+            </p>
+              <ul class="list-group">
+                <li class="list-group-item list-group-item-light"><b>E-post: </b>{{ user.email }}</li>
+                <li class="list-group-item list-group-item-light"><b>Brukernavn: </b>{{ user.username }}</li>
+                <li class="list-group-item list-group-item-light"><b>Strikkenivå: </b>{{ user.strikkeNivaa }}</li>
+                <li class="list-group-item list-group-item-light"><b>Fødselsdato: </b>{{ user.bursdag | date:"d/m/Y" }}</li>
+              </ul>
+            </p>
+          </div>
+        </div>
+{% endblock sidebar %}
+
+{% block arrangementer %}
+    <div class="col-md-4" style="height: 100%">
+          <div class="content-section">
+              <h4 style="padding-bottom: 10px;" >{{ user.first_name }}s arrangementer:</h4>
+              {% for arr in Arrangementer %}
+              <div class="card" style="margin-bottom: 15px">
+                  <div class="card-body">
+                    <h5 class="card-title">{{ arr.title }}</h5>
+                    <h6 class="card-subtitle mb-2">Type arrangement:  {{ arr.type }}</h6>
+                    <h7 class="card-subtitle mb-2 text-muted">Dato: {{ arr.tidspunkt }}</h7>
+                     <p class="card-text">{{arr.innhold}}</p>
+                  </div>
+              </div>
+              {% endfor %}
+          </div>
+    </div>
+{% endblock arrangementer %}

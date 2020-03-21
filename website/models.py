@@ -166,6 +166,12 @@ class Bruker(AbstractUser):
             users[b.id] = b
         return users
 
+    def get_user_by_id(self, id):
+        bruker = Bruker.objects.filter(id=id)
+        if len(bruker) > 0:
+            return bruker[0]
+        return False
+
 class Arrangement(models.Model):
     """DB model for events"""
 

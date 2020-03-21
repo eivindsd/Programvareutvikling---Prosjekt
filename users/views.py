@@ -21,7 +21,8 @@ def register(request):
 @login_required
 def profile(request):
     contex = {"mineArrangementer": Arrangement.getMyArrangement(Arrangement, request.user),
-              "mineInnlegg": innlegg.getMyPosts(innlegg, request.user)}
+              "mineInnlegg": innlegg.getMyPosts(innlegg, request.user),
+              }
     return render(request, "users/profile.html", contex)
 
 def login(request):

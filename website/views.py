@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from users.forms import eventFormAdmin, eventFormBedrift, eventFormBruker, postForm, eventForm, sendMessageForm, AllUsersForm
 from django.contrib import messages
-from website.models import Arrangement, deltokArrangement, Messages, Bruker
+from website.models import Arrangement, deltokArrangement, Messages, Bruker, innlegg
 
 """Loads the correct template and form (when needed)"""
 
@@ -10,6 +10,17 @@ def home(request):
         return redirect('startPage')
     if request.method == 'POST':
         form = AllUsersForm(request.POST, user=request.user)
+        IDs = request.POST.getlist('bruker')
+        if len(IDs) > 0:
+            userId = request.POST.getlist('bruker')[0]
+        else: userId = False
+        if userId:
+            user = Bruker.get_user_by_id(Bruker, int(userId))
+            contex = {"Arrangementer": Arrangement.getMyArrangement(Arrangement, user),
+                      "Innlegg": innlegg.getMyPosts(innlegg, user),
+                      "user": user,
+                      }
+            return render(request, "users/otherProfile.html", contex)
         if form.is_valid():
             form.save()
             return redirect('home')

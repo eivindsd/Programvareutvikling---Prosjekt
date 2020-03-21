@@ -24,7 +24,7 @@
               </fieldset>
               <form method="POST">
                   {% csrf_token %}
-                  <select id="bruker">
+                  <select id="bruker" name='bruker'>
                     {%for bruker in brukere%}
                       <option value="{{ bruker.id }}">{{ bruker }}</option>
                     {% endfor %}
