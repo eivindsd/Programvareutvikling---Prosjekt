@@ -4,19 +4,25 @@
     <h1>Hjem</h1>
     <br>
     <h3>Mine Meldinger</h3>
-    {% for message in mineMessages %}
-        <div class="card" style="margin-bottom: 15px">
-                  <div class="card-body">
-                    <p class="card-subtitle mb-2 text-muted">Dato: {{ message.date }}</p>
-                    <h6 class="card-title">{{ message.content }}</h6>
-                    <input type="submit" name="svar" value="Svar" class="btn btn-primary"/>
-                  </div>
-              </div>
+    {% for message in mineMeldinger %}
+        <form method="POST">
+        {% csrf_token %}
+            <div class="card" style="margin-bottom: 15px">
+                      <div class="card-body">
+                        <p class="card-subtitle mb-2 text-muted">Dato: {{ message.date }}</p>
+                        <h6 class="card-title">Fra: {{ message.author }}</h6>
+                        <b>Innhold: </b>
+                        <p class="card-title">{{ message.content }}</p>
+                        <input type="hidden" name="messageId" value={{message.id}}>
+                        <input type="text" name="svarText" placeholder="Skriv svaret her">
+                        <input type="submit" name="svar" value="Svar" class="btn btn-primary"/>
+                      </div>
+            </div>
+        </form>
     {% endfor %}
 {% endblock content %}
 
 {% block sidebar %}
-    <div class="col-md-4">
           <div class="content-section">
             <h2>Se andres profil</h2>
               <fieldset class="form-group">
@@ -32,9 +38,23 @@
               <input type="submit" name="seProfil" value="Se profil" class="btn btn-primary" />
               </form>
           </div>
-        </div>
 {% endblock sidebar %}
 
-{% block arrangementer %}
-
-{% endblock arrangementer %}
+{% block sidebar2 %}
+          <div class="content-section">
+              <h4 style="padding-bottom: 10px;" >Fått svar på:</h4>
+              {% for svar in svarene %}
+              <div class="card" style="margin-bottom: 15px">
+                  <div class="card-body">
+                      <p class="card-subtitle mb-2 text-muted">Dato: {{ svar.date }}</p>
+                      <h6 class="card-title">Svaret fra: {{ svar.receiver }}</h6>
+                      <b>Melding innhold: </b>
+                      <p class="card-title">{{ svar.content }}</p>
+                      <b>Svaret er: </b>
+                      <p class="card-title">{{ svar.answer }}</p>
+                      <input type="hidden" name="messageId" value={{message.id}}>
+                  </div>
+              </div>
+              {% endfor %}
+          </div>
+{% endblock sidebar2 %}

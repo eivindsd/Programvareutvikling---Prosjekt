@@ -20,7 +20,6 @@
 {% endblock content %}
 
 {% block sidebar %}
-    <div class="col-md-4">
           <div class="content-section">
             <h2>{{ user.first_name }}  {{ user.last_name }}</h2>
             <p class='text-muted'>
@@ -40,11 +39,9 @@
               </ul>
             </p>
           </div>
-        </div>
 {% endblock sidebar %}
 
-{% block arrangementer %}
-    <div class="col-md-4" style="height: 100%">
+{% block sidebar2 %}
           <div class="content-section">
               <h4 style="padding-bottom: 10px;" >Mine arrangementer:</h4>
               {% for arr in mineArrangementer %}
@@ -58,5 +55,4 @@
               </div>
               {% endfor %}
           </div>
-    </div>
-{% endblock arrangementer %}
+{% endblock sidebar2 %}

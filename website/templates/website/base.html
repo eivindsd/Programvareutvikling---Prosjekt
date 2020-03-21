@@ -66,12 +66,10 @@
             {% endif %}
           {% block content %}{% endblock %}
         </div>
+        <div class="col-md-4" style="height: 100%">
           {% block sidebar %}{% endblock %}
-      </div>
-      <div class="row">
-          <div class="col-md-8">
-          </div>
-          {% block arrangementer %}{% endblock %}
+          {% block sidebar2 %}{% endblock %}
+        </div>
       </div>
 </main>
 

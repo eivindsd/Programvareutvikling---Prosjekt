@@ -15,7 +15,6 @@
 {% endblock content %}
 
 {% block sidebar %}
-    <div class="col-md-4">
           <div class="content-section">
               <h2>{{ user.first_name }}  {{ user.last_name }}</h2>
             <p class='text-muted'>
@@ -29,17 +28,14 @@
             </p>
               <ul class="list-group">
                 <li class="list-group-item list-group-item-light"><b>E-post: </b>{{ user.email }}</li>
-                <li class="list-group-item list-group-item-light"><b>Brukernavn: </b>{{ user.username }}</li>
                 <li class="list-group-item list-group-item-light"><b>Strikkenivå: </b>{{ user.strikkeNivaa }}</li>
                 <li class="list-group-item list-group-item-light"><b>Fødselsdato: </b>{{ user.bursdag | date:"d/m/Y" }}</li>
               </ul>
             </p>
           </div>
-        </div>
 {% endblock sidebar %}
 
-{% block arrangementer %}
-    <div class="col-md-4" style="height: 100%">
+{% block sidebar2 %}
           <div class="content-section">
               <h4 style="padding-bottom: 10px;" >{{ user.first_name }}s arrangementer:</h4>
               {% for arr in Arrangementer %}
@@ -53,5 +49,4 @@
               </div>
               {% endfor %}
           </div>
-    </div>
-{% endblock arrangementer %}
+{% endblock sidebar2 %}

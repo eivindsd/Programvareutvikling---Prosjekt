@@ -10,6 +10,7 @@ def home(request):
         return redirect('startPage')
     if request.method == 'POST':
         form = AllUsersForm(request.POST, user=request.user)
+        """Se andres profil"""
         IDs = request.POST.getlist('bruker')
         if len(IDs) > 0:
             userId = request.POST.getlist('bruker')[0]
@@ -21,15 +22,24 @@ def home(request):
                       "user": user,
                       }
             return render(request, "users/otherProfile.html", contex)
+        """Svar på meldingen"""
+        if request.POST.get("svar"):
+            messageId = request.POST.get("messageId")
+            answerText = request.POST.get("svarText")
+            if answerText == "":
+                messages.warning(request, f'Du har glemt å skrive svaret!')
+            else:
+                Messages.objects.answer(answerText, messageId)
         if form.is_valid():
             form.save()
             return redirect('home')
     else:
         form = AllUsersForm(request.user)
     contex = {
-        'mineMessages': Messages.getMyMessages(Messages, request.user),
+        'mineMeldinger': Messages.getMyMessages(Messages, request.user),
         'form': form,
         'brukere': Bruker.get_all(Bruker),
+        'svarene': Messages.myAnsweredMessages(Messages, request.user),
     }
     return render(request, "website/home.html", contex)
 
