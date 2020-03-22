@@ -1,7 +1,7 @@
 {% extends "website/base.html" %}
 {% load crispy_forms_tags %}
 {% block content %}
-    <h1 id="header_profil">Min profil</h1>
+    <h1 id="header_profil" style=" margin-bottom: 33px; display: flex; justify-content: center;">Min profil</h1>
     <div style="display: table">
         <form method="POST" action="/createPost/">
                 {% csrf_token %}
@@ -20,7 +20,7 @@
 {% endblock content %}
 
 {% block sidebar %}
-    <div class="col-md-4" id="info">
+    <div class="col-md-4" style="margin-top: 3%">
           <div class="content-section">
             <h2>{{ user.first_name }}  {{ user.last_name }}</h2>
             <p class='text-muted'>

@@ -45,17 +45,6 @@ ul {
   margin-top: 30px;
 }
 
-#info{
-  margin-top: 3%;
-}
-
-#header_profil{
-  margin-bottom: 33px;
-  display: flex;
-  justify-content: center;
-
-}
-
 .btn-primary{
   background-color: #FFA833;
   border-color: #FFA833;
