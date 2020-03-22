@@ -1,18 +1,17 @@
 {% extends "website/base.html" %}
 {% block content %}
+    <h1 style="display: flex; justify-content: center">Arrangementer</h1>
     <div style="display: table">
-        <h1 style="margin-bottom: 2rem; display: inline">Arrangementer</h1>
         <form method="POST" action="/createEvent/">
             {% csrf_token %}
-            <input type="submit" name="opprett" value="Opprett" class="btn btn-primary" style="display: table-cell; position: absolute; right: 0; vertical-align: middle"/>
+            <input type="submit" name="opprett" value="Opprett arrangement" class="btn btn-outline-info" style="display: table-cell; vertical-align: middle; margin-top: 25px; margin-bottom: 15px"/>
         </form>
 
     </div>
-    <br><br><br>
     {% for arr in arrangementer  %}
     <form method="POST">
         {% csrf_token %}
-            <div class="card" id="event-card" style="margin-bottom: 2rem;">
+            <div class="card" id="event-card" style="margin-bottom: 2rem; margin-top: 0px">
                 <div class="card-header">
                     {{ arr.type }}
                 </div>

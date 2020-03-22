@@ -36,7 +36,6 @@ small{
     cursor: pointer;
 }
 #submit:hover{
-    background-color: #EF9720;
     transition: all .4s ease;
 }
 #registrer{
