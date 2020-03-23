@@ -98,7 +98,14 @@ class deltokArrangementManager(models.Manager):
         return deltokArrangement.objects.filter(arrangement=arr, bruker=bruker).delete()
 
 class MessagesManager(models.Manager):
-    pass
+    def answer(self, answer, messageId):
+        try:
+           message = Messages.objects.get(id=messageId)
+           message.answer = answer
+           message.save()
+           return message
+        except:
+            return False
 
 
 
@@ -165,6 +172,12 @@ class Bruker(AbstractUser):
         for b in Bruker.objects.all():
             users[b.id] = b
         return users
+
+    def get_user_by_id(self, id):
+        bruker = Bruker.objects.filter(id=id)
+        if len(bruker) > 0:
+            return bruker[0]
+        return False
 
 class Arrangement(models.Model):
     """DB model for events"""
@@ -278,6 +291,20 @@ class Messages(models.Model):
     def get_all(self):
         return Messages.objects.all()
 
-    def getMyMessages(self, bruker):
-        list_messages = Messages.objects.filter(receiver=bruker)
+    def getMyMessages(self, user):
+        list_messages = Messages.objects.filter(receiver=user)
         return list_messages
+
+    def getMessageById(self, id):
+        message = Messages.objects.filter(id=id)
+        if len(message) > 0:
+            return message[0]
+        return False
+
+    def myAnsweredMessages(self, user):
+        messages = Messages.objects.filter(author=user)
+        answered = []
+        for message in messages:
+            if message.answer:
+                answered.append(message)
+        return answered

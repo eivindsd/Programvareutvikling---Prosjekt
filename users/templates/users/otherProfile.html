@@ -1,15 +1,10 @@
 {% extends "website/base.html" %}
 {% load crispy_forms_tags %}
 {% block content %}
-    <h1 id="header_profil" style=" margin-bottom: 33px; display: flex; justify-content: center;">Min profil</h1>
-    <div style="display: table">
-        <form method="POST" action="/createPost/">
-                {% csrf_token %}
-                <input type="submit" value="Nytt innlegg" name="nytt" class="btn btn-outline-info" style="display: table-cell; position: absolute; right: 15px; vertical-align: middle"/>
-            </form>
-    </div>
-    <h3 style="margin-bottom: 20px;">Mine Innlegg</h3>
-    {% for innlegg in mineInnlegg %}
+    <h1>{{ user.first_name }}s profil</h1>
+
+    <h3>{{ user.first_name }}s Innlegg</h3>
+    {% for innlegg in Innlegg %}
         <div class="card" style="margin-bottom: 15px">
                   <div class="card-body">
                     <p class="card-subtitle mb-2 text-muted">Dato: {{ innlegg.dateTime }}</p>
@@ -20,21 +15,19 @@
 {% endblock content %}
 
 {% block sidebar %}
-    <div class="col-md-4" style="margin-top: 3%">
           <div class="content-section">
-            <h2>{{ user.first_name }}  {{ user.last_name }}</h2>
+              <h2>{{ user.first_name }}  {{ user.last_name }}</h2>
             <p class='text-muted'>
                 {% if user.is_superuser %}
-                    Adminbruker
+                    Admin
                 {% elif user.is_bedrift %}
-                    Bedriftsbruker
+                    Bedrift
                 {% else %}
                     Privatbruker
                 {% endif %}
             </p>
               <ul class="list-group">
                 <li class="list-group-item list-group-item-light"><b>E-post: </b>{{ user.email }}</li>
-                <li class="list-group-item list-group-item-light"><b>Brukernavn: </b>{{ user.username }}</li>
                 <li class="list-group-item list-group-item-light"><b>Strikkenivå: </b>{{ user.strikkeNivaa }}</li>
                 <li class="list-group-item list-group-item-light"><b>Fødselsdato: </b>{{ user.bursdag | date:"d/m/Y" }}</li>
               </ul>
@@ -44,8 +37,8 @@
 
 {% block sidebar2 %}
           <div class="content-section">
-              <h4 style="padding-bottom: 10px;" >Mine arrangementer:</h4>
-              {% for arr in mineArrangementer %}
+              <h4 style="padding-bottom: 10px;" >{{ user.first_name }}s arrangementer:</h4>
+              {% for arr in Arrangementer %}
               <div class="card" style="margin-bottom: 15px">
                   <div class="card-body">
                     <h5 class="card-title">{{ arr.title }}</h5>

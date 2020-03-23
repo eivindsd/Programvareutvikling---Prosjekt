@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from users.forms import eventFormAdmin, eventFormBedrift, eventFormBruker, postForm, eventForm, sendMessageForm, AllUsersForm
 from django.contrib import messages
-from website.models import Arrangement, deltokArrangement, Messages, Bruker
+from website.models import Arrangement, deltokArrangement, Messages, Bruker, innlegg
 
 """Loads the correct template and form (when needed)"""
 
@@ -10,15 +10,36 @@ def home(request):
         return redirect('startPage')
     if request.method == 'POST':
         form = AllUsersForm(request.POST, user=request.user)
+        """Se andres profil"""
+        IDs = request.POST.getlist('bruker')
+        if len(IDs) > 0:
+            userId = request.POST.getlist('bruker')[0]
+        else: userId = False
+        if userId:
+            user = Bruker.get_user_by_id(Bruker, int(userId))
+            contex = {"Arrangementer": Arrangement.getMyArrangement(Arrangement, user),
+                      "Innlegg": innlegg.getMyPosts(innlegg, user),
+                      "user": user,
+                      }
+            return render(request, "users/otherProfile.html", contex)
+        """Svar på meldingen"""
+        if request.POST.get("svar"):
+            messageId = request.POST.get("messageId")
+            answerText = request.POST.get("svarText")
+            if answerText == "":
+                messages.warning(request, f'Du har glemt å skrive svaret!')
+            else:
+                Messages.objects.answer(answerText, messageId)
         if form.is_valid():
             form.save()
             return redirect('home')
     else:
         form = AllUsersForm(request.user)
     contex = {
-        'mineMessages': Messages.getMyMessages(Messages, request.user),
+        'mineMeldinger': Messages.getMyMessages(Messages, request.user),
         'form': form,
         'brukere': Bruker.get_all(Bruker),
+        'svarene': Messages.myAnsweredMessages(Messages, request.user),
     }
     return render(request, "website/home.html", contex)
 
