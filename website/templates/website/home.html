@@ -19,7 +19,7 @@
                       </div>
             </div>
         </form>
-    <h1 style=" margin-bottom: 33px; display: flex; justify-content: center;">Mine meldinger</h1>
+    {% endfor %}
     {% for message in mineMessages %}
         <div class="card" style="margin-bottom: 15px">
                   <div class="card-body">
@@ -32,7 +32,6 @@
 {% endblock content %}
 
 {% block sidebar %}
-    <div class="col-md-4" style="margin-top: 3%">
           <div class="content-section">
             <h2 style="margin-bottom: 30px; text-align: center">Se andres profil</h2>
               <fieldset class="form-group">
@@ -46,7 +45,6 @@
                   </select>
               <input type="submit" name="seProfil" value="Se profil" class="btn btn-primary" style="position: absolute; right: 33px; top: 95px" />
               </form>
-          </div>
 {% endblock sidebar %}
 
 {% block sidebar2 %}
