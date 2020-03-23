@@ -1,14 +1,14 @@
 {% extends "website/base.html" %}
 {% load crispy_forms_tags %}
 {% block content %}
-    <h1>Min profil</h1>
+    <h1 id="header_profil" style=" margin-bottom: 33px; display: flex; justify-content: center;">Min profil</h1>
     <div style="display: table">
         <form method="POST" action="/createPost/">
                 {% csrf_token %}
-                <input type="submit" value="Nytt innlegg" name="nytt" class="btn btn-primary" style="display: table-cell; position: absolute; right: 0; vertical-align: middle"/>
+                <input type="submit" value="Nytt innlegg" name="nytt" class="btn btn-outline-info" style="display: table-cell; position: absolute; right: 15px; vertical-align: middle"/>
             </form>
     </div>
-    <h3>Mine Innlegg</h3>
+    <h3 style="margin-bottom: 20px;">Mine Innlegg</h3>
     {% for innlegg in mineInnlegg %}
         <div class="card" style="margin-bottom: 15px">
                   <div class="card-body">
@@ -20,6 +20,7 @@
 {% endblock content %}
 
 {% block sidebar %}
+    <div class="col-md-4" style="margin-top: 3%">
           <div class="content-section">
             <h2>{{ user.first_name }}  {{ user.last_name }}</h2>
             <p class='text-muted'>
