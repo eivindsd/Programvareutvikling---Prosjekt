@@ -1,9 +1,7 @@
 {% extends "website/base.html" %}
 {% load crispy_forms_tags %}
 {% block content %}
-    <h1>Hjem</h1>
-    <br>
-    <h3>Mine Meldinger</h3>
+    <h1 style="text-align: center;">Mine Meldinger</h1>
     {% for message in mineMeldinger %}
         <form method="POST">
         {% csrf_token %}
@@ -43,7 +41,7 @@
                       <option value="{{ bruker.id }}">{{ bruker }}</option>
                     {% endfor %}
                   </select>
-              <input type="submit" name="seProfil" value="Se profil" class="btn btn-primary" style="position: absolute; right: 33px; top: 95px" />
+              <input type="submit" name="seProfil" value="Se profil" class="btn btn-primary" style="position: absolute; right: 33px; top: 115px" />
               </form>
 {% endblock sidebar %}
 
