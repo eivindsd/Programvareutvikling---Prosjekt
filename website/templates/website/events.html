@@ -1,7 +1,7 @@
 {% extends "website/base.html" %}
 {% block content %}
     <h1 style="display: flex; justify-content: center">Arrangementer</h1>
-    <div style="display: flex; justify-content: center;>
+    <div style="display: flex; justify-content: center;">
         <form method="POST" action="/createEvent/">
             {% csrf_token %}
             <input type="submit" name="opprett" value="Opprett arrangement" class="btn btn-outline-info" style="display: table-cell; vertical-align: middle; margin-top: 25px; margin-bottom: 15px"/>
