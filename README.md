@@ -1,13 +1,6 @@
-<p align="center">
-  <a href="https://storybook.js.org/">
-    <img src="https://i.imgur.com/8zB1T9C.png" alt="Storybook" width="628" />
-  </a>
-</p>
-
-
 # Strikkit
-[Wiki-link]()
 
+[Wiki-link]()
 
 Strikkit er platformen som forener Norges strikkere. Her kan du dele dine siste strikkeprosjekter, finne mestrende utfordringer, eller oppdage kurs og andre eventer å delta på.
 
