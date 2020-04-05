@@ -1,9 +1,8 @@
 # Strikkit
 
-[Wiki-link]()
-
 Strikkit er platformen som forener Norges strikkere. Her kan du dele dine siste strikkeprosjekter, finne mestrende utfordringer, eller oppdage kurs og andre eventer å delta på.
 
+[Wiki-link]()
 
 ## 🛠 Forhåndskrav
 
