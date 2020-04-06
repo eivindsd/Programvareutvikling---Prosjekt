@@ -1,3 +1,5 @@
+
+![strikkit](14/webiste/static/website/images/92409963_671868846962617_1571262872699273216_n.png)
 ![alt text](webiste/static/website/images/92409963_671868846962617_1571262872699273216_n.png)
 
 # Strikkit
