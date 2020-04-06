@@ -1,10 +1,5 @@
 <img src="/website/static/website/images/strikkit_med_tekst.png" align="center" height="150">
 
-
-<div align="center" height="120px">
-![strikkit](/website/static/website/images/strikkit_med_tekst.png)
-</div>
-
 # Strikkit
 
 Strikkit er platformen som forener Norges strikkere. Her kan du dele dine siste strikkeprosjekter, finne mestrende utfordringer, eller oppdage kurs og andre eventer å delta på.
