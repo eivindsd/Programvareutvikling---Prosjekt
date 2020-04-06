@@ -6,7 +6,7 @@ Strikkit er platformen som forener Norges strikkere. Her kan du dele dine siste 
 
 ## 🛠 Forhåndskrav
 
-Følgende trengs for å kunne  kjøre Strikkit:
+Følgende trengs for å kunne utvikle og kjøre Strikkit:
 
 - **Python 3.7.0** eller nyere
     - Sjekk versjon:`python --version`
