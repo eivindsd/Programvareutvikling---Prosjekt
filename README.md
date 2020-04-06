@@ -42,7 +42,7 @@ Følgende trengs for å kunne utvikle og kjøre Strikkit:
 - `python manage.py runserver`
 - Strikkit vil kjøre lokalt på: http://127.0.0.1:8000/
 - Åpne administrasjonssiden på: http://127.0.0.1:8000/admin
-- Stopp serveren ved: `ctrl + c`
+- Stopp serveren med: `ctrl + c`
 #### Brukerguide
 - Brukerguide for Strikkit finnes [her]().
 
