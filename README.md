@@ -1,4 +1,4 @@
-<div align="center">
+<div align="center" height="120px">
 ![strikkit](/website/static/website/images/strikkit_med_tekst.png)
 </div>
 
