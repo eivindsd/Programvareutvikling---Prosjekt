@@ -73,7 +73,7 @@ Prosedyre for ???delegering??? av task.
 
 - Diskusjon på [Slack](https://join.slack.com/t/tdt4140progra-qcl9717/shared_invite/zt-dd8adjty-c8auLq9xqrPlg4GmfkdHkg)
 - Kontakt på [e-post](mailto:eivind.dovland@gmail.com)
-- Ressursside på [Google Drive](https://docs.google.com/spreadsheets/d/15qQ-gtJjxQj-VVuyxZlJJvFn6olqX0QQGfVPgQUNHMY/edit?usp=sharing)
+- Ressursside på [Google Drive](https://drive.google.com/drive/folders/1t935WvVLRR06sRqwpEmIcmaG9hHxzESI?usp=sharing)
 
 
 ## 📝 Lisens
