@@ -1,3 +1,6 @@
+<img src="/website/static/website/images/strikkit_med_tekst.png" height="120">
+
+
 <div align="center" height="120px">
 ![strikkit](/website/static/website/images/strikkit_med_tekst.png)
 </div>
