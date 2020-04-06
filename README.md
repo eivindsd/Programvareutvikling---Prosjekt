@@ -34,10 +34,10 @@ Følgende trengs for å kunne utvikle og kjøre Strikkit:
 
 ## 🚀 Kom i gang
 
-#### Hent prosjekt:
+#### Hent prosjekt
 - Naviger til ønsket plassering lokalt.
 - `git clone https://gitlab.stud.idi.ntnu.no/tdt4140-2020/14.git`
-#### Sett opp database:
+#### Sett opp database
 - `python manage.py makemigrations`
 - `python manage.py migrate`
 #### Lag en adminbruker
