@@ -1,4 +1,4 @@
-<img src="/website/static/website/images/strikkit_med_tekst.png" height="120">
+<img src="/website/static/website/images/strikkit_med_tekst.png" align="center" height="150">
 
 
 <div align="center" height="120px">
