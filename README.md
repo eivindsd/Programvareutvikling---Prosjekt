@@ -1,3 +1,5 @@
+![alt text](webiste/static/website/images/92409963_671868846962617_1571262872699273216_n.png)
+
 # Strikkit
 
 Strikkit er platformen som forener Norges strikkere. Her kan du dele dine siste strikkeprosjekter, finne mestrende utfordringer, eller oppdage kurs og andre eventer å delta på.
@@ -17,7 +19,7 @@ Følgende trengs for å kunne utvikle og kjøre Strikkit:
 - **Crispy Forms x.x.x** eller nyere
     - Sjekk versjon: ???
     - Hvis mangler: [Innstalasjonsguide](https://django-crispy-forms.readthedocs.io/en/latest/install.html) 
-- **Django x.x.x** eller nyere
+- **Django 3.0.3** eller nyere
     - Sjekk versjon:
         - Åpne en python console i terminalen med: `python`
         - Importer Django: `import django`
@@ -46,9 +48,10 @@ Følgende trengs for å kunne utvikle og kjøre Strikkit:
 #### Brukerguide
 - Brukerguide for Strikkit finnes [her]().
 
+
 ## 🤝 Bidra
 
-Oversikt over sprinter, brukerhsitorier, og krav finnes på vårt [Taskboard](https://docs.google.com/spreadsheets/d/15qQ-gtJjxQj-VVuyxZlJJvFn6olqX0QQGfVPgQUNHMY/edit?usp=sharing). Her blir sprinter planlagt, mål satt opp, og brukerhistorer delt opp i mindre tasks. Vi bruker taskboardet aktivt for å holde oversikt over oppgaver som er planlagt, under arbeid eller utført.  
+Oversikt over sprinter, brukerhsitorier, og krav finnes på vårt [Taskboard](https://docs.google.com/spreadsheets/d/15qQ-gtJjxQj-VVuyxZlJJvFn6olqX0QQGfVPgQUNHMY/edit?usp=sharing). Her blir sprinter planlagt, mål satt opp, og brukerhistorer delt opp i mindre tasks. Vi bruker taskboardet aktivt for å holde oversikt over oppgaver som er planlagt, under arbeid eller utført.
 
 Prosedyre for ???delegering??? av task.
 - Flytt task til "blir behandlet" kolonnen.
@@ -59,6 +62,11 @@ Prosedyre for ???delegering??? av task.
 - Merge etter godkjenning.
 - Flytt task til "ferdig" kolonnen.
 
+
+## 🐞 Rapportering av bugs
+
+- Ved oppdagelse av bugs, rapporter [her](mailto:eivind.dovland@gmail.com).
+- Legg gjerne med skjermdump av feilmelding og beskrivelse av brukssituasjon.
 
 ## 🗃 Dokumentasjon
 
