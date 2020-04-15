@@ -18,8 +18,8 @@ Følgende trengs for å kunne kjøre og utvikle Strikkit:
 - **Pip 18.1** eller nyere
     - Sjekk versjon: `pip --version`
     - Hvis mangler: [Innstalasjonsguide](https://pypi.org/project/pip/)
-- **Crispy Forms x.x.x** eller nyere
-    - Sjekk versjon: ???
+- **Crispy Forms 1.9** eller nyere
+    - Sjekk versjon: `pip list`
     - Hvis mangler: [Innstalasjonsguide](https://django-crispy-forms.readthedocs.io/en/latest/install.html) 
 - **Django 3.0.3** eller nyere
     - Sjekk versjon:
@@ -27,7 +27,7 @@ Følgende trengs for å kunne kjøre og utvikle Strikkit:
         - Importer Django: `import django`
         - Sjekk version: `django.VERSION`
     - Hvis mangler: [Innstalasjonsguide](https://www.djangoproject.com/download/) 
-- **Git x.x.x eller nyere**
+- **Git 2.20 eller nyere**
     - Sjekk versjon: `git --version`
     - Hvis mangler: [Innstalasjonsguide](https://git-scm.com/downloads) 
 
