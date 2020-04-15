@@ -48,7 +48,7 @@ Følgende trengs for å kunne kjøre og utvikle Strikkit:
 - Åpne administrasjonssiden på: http://127.0.0.1:8000/admin
 - Stopp serveren med: `ctrl + c`
 #### Brukerguide
-- Brukerguide for Strikkit finnes [her]().
+- Brukerguide for Strikkit finnes [her](https://gitlab.stud.idi.ntnu.no/tdt4140-2020/14/-/wikis/Brukermanual).
 
 
 ## 🤝 Bidra
