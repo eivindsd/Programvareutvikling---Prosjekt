@@ -14,22 +14,22 @@ Følgende trengs for å kunne kjøre og utvikle Strikkit:
 
 - **Python 3.7.0** eller nyere
     - Sjekk versjon:`python --version`
-    - Hvis mangler: [Innstalasjonsguide](https://www.python.org/downloads/)
+    - Hvis mangler: [Installasjonsguide](https://www.python.org/downloads/)
 - **Pip 18.1** eller nyere
     - Sjekk versjon: `pip --version`
-    - Hvis mangler: [Innstalasjonsguide](https://pypi.org/project/pip/)
+    - Hvis mangler: [Installasjonsguide](https://pypi.org/project/pip/)
 - **Crispy Forms 1.9** eller nyere
     - Sjekk versjon: `pip list`
-    - Hvis mangler: [Innstalasjonsguide](https://django-crispy-forms.readthedocs.io/en/latest/install.html) 
+    - Hvis mangler: [Installasjonsguide](https://django-crispy-forms.readthedocs.io/en/latest/install.html) 
 - **Django 3.0.3** eller nyere
     - Sjekk versjon:
         - Åpne en python console i terminalen med: `python`
         - Importer Django: `import django`
         - Sjekk version: `django.VERSION`
-    - Hvis mangler: [Innstalasjonsguide](https://www.djangoproject.com/download/) 
+    - Hvis mangler: [Installasjonsguide](https://www.djangoproject.com/download/) 
 - **Git 2.20 eller nyere**
     - Sjekk versjon: `git --version`
-    - Hvis mangler: [Innstalasjonsguide](https://git-scm.com/downloads) 
+    - Hvis mangler: [Installasjonsguide](https://git-scm.com/downloads) 
 
 
 ## 🚀 Kom i gang
