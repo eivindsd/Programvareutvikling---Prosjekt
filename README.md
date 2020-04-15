@@ -6,6 +6,8 @@
 
 Strikkit er platformen som forener Norges strikkere. Her kan du dele dine siste strikkeprosjekter, finne mestrende utfordringer, eller oppdage kurs og andre eventer å delta på.
 
+Denne nettsiden er utviklet i emnet TDT4140-Programvareutvikling ved NTNU.
+
 [Wiki-link](https://gitlab.stud.idi.ntnu.no/tdt4140-2020/14/-/wikis/home)
 
 ## 🛠 Forhåndskrav
