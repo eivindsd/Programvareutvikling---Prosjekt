@@ -55,7 +55,9 @@ Følgende trengs for å kunne kjøre og utvikle Strikkit:
 
 Oversikt over sprinter, brukerhsitorier, og krav finnes på vårt [Taskboard](https://docs.google.com/spreadsheets/d/15qQ-gtJjxQj-VVuyxZlJJvFn6olqX0QQGfVPgQUNHMY/edit?usp=sharing). Her blir sprinter planlagt, mål satt opp, og brukerhistorer delt opp i mindre tasks. Vi bruker taskboardet aktivt for å holde oversikt over oppgaver som er planlagt, under arbeid eller utført.
 
-Prosedyre for ???delegering??? av task.
+Vi følger [denne](https://gitlab.stud.idi.ntnu.no/tdt4140-2020/14/-/wikis/uploads/12bd1b1bb6c8bae95747892116f9d5d3/git-flowchart.pdf) flyten for bruk av git.
+
+Prosedyre for bruk av taskboard:
 - Flytt task til "blir behandlet" kolonnen.
 - Pull nyeste versjon av prosjektet.
 - Opprett branch med beskrivende navn for tasken.
@@ -80,7 +82,7 @@ Prosedyre for ???delegering??? av task.
 - [Crispy Forms](https://django-crispy-forms.readthedocs.io/en/latest/#)
 
 
-## 👥 Community?/Kom i kontakt?
+## 👥 Kom i kontakt
 
 - Diskusjon på [Slack](https://join.slack.com/t/tdt4140progra-qcl9717/shared_invite/zt-dd8adjty-c8auLq9xqrPlg4GmfkdHkg)
 - Kontakt på [e-post](mailto:eivind.dovland@gmail.com)
