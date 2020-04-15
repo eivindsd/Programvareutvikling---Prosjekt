@@ -27,7 +27,7 @@ Følgende trengs for å kunne kjøre og utvikle Strikkit:
         - Importer Django: `import django`
         - Sjekk version: `django.VERSION`
     - Hvis mangler: [Installasjonsguide](https://www.djangoproject.com/download/) 
-- **Git 2.20 eller nyere**
+- **Git 2.20** eller nyere
     - Sjekk versjon: `git --version`
     - Hvis mangler: [Installasjonsguide](https://git-scm.com/downloads) 
 
